@@ -3,24 +3,275 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Akiharu Hyuga - Apps</title>
+  <title>もふふミルクとにゃんこ脱出ゲーム</title>
   <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
-      max-width: 600px;
-      margin: 60px auto;
-      padding: 0 16px;
-      color: #333;
-      line-height: 1.8;
+      background: #1a0a2e;
+      color: #fff;
+      min-height: 100vh;
     }
-    h1 { font-size: 1.4em; }
-    a { color: #0066cc; }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 40px 20px;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #1a0a2e 0%, #2d1b5e 40%, #1a3a5e 100%);
+      z-index: 0;
+    }
+
+    .stars {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .star {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: #fff;
+      border-radius: 50%;
+      animation: twinkle var(--d, 3s) ease-in-out infinite alternate;
+      opacity: var(--o, 0.5);
+    }
+
+    @keyframes twinkle {
+      from { opacity: 0.2; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1.2); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      max-width: 500px;
+      width: 100%;
+    }
+
+    .app-icon {
+      width: 120px;
+      height: 120px;
+      border-radius: 28px;
+      box-shadow: 0 20px 60px rgba(180, 120, 255, 0.4);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .title-logo {
+      width: 100%;
+      max-width: 360px;
+      filter: drop-shadow(0 4px 20px rgba(180, 120, 255, 0.6));
+    }
+
+    .tagline {
+      font-size: 1em;
+      color: #c9a8f5;
+      letter-spacing: 0.1em;
+      text-align: center;
+    }
+
+    .store-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 8px;
+    }
+
+    .store-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      text-decoration: none;
+      backdrop-filter: blur(10px);
+      transition: all 0.2s;
+      font-size: 0.9em;
+    }
+
+    .store-btn:hover {
+      background: rgba(255,255,255,0.22);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(180,120,255,0.3);
+    }
+
+    .store-btn svg { width: 24px; height: 24px; fill: #fff; }
+
+    /* Screenshots */
+    .screenshots {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      gap: 12px;
+      margin-top: 32px;
+      overflow-x: auto;
+      padding: 8px 4px 16px;
+      scrollbar-width: none;
+    }
+
+    .screenshots::-webkit-scrollbar { display: none; }
+
+    .screenshot {
+      flex-shrink: 0;
+      width: 140px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* Section */
+    .section {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+
+    .section h2 {
+      font-size: 1.3em;
+      color: #c9a8f5;
+      margin-bottom: 20px;
+      letter-spacing: 0.05em;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .feature-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .feature-card .emoji { font-size: 2em; margin-bottom: 10px; }
+    .feature-card h3 { font-size: 0.95em; margin-bottom: 6px; color: #e8d5ff; }
+    .feature-card p { font-size: 0.85em; color: #a08abf; line-height: 1.6; }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      color: #6b5580;
+      font-size: 0.85em;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    footer a { color: #9b78d4; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
-  <h1>Akiharu Hyuga</h1>
-  <ul>
-    <li><a href="/nyanko/privacy-policy.html">もふふミルクとにゃんこ脱出ゲーム - プライバシーポリシー</a></li>
-  </ul>
+
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="stars" id="stars"></div>
+
+    <div class="hero-content">
+      <img src="assets/app_icon.png" alt="アプリアイコン" class="app-icon">
+      <img src="assets/title.png" alt="もふふミルクとにゃんこ脱出ゲーム" class="title-logo">
+      <p class="tagline">ふわふわの謎を解いて、ミルクと一緒に脱出しよう</p>
+
+      <div class="store-buttons">
+        <a href="https://apps.apple.com/jp/app/id6760703475" class="store-btn">
+          <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          App Store
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.moyachi.nekoEscapeGame" class="store-btn">
+          <svg viewBox="0 0 24 24"><path d="M3.18 23.76a2 2 0 0 1-.59-1.47V1.71A2 2 0 0 1 3.18.24L3.27.16l12.44 12.44v.29L3.27 25.33zM20.12 16.66l-3.31-3.31 3.31-3.31 3.75 2.13a2.13 2.13 0 0 1 0 3.73zM3.27 25.33l13.54-7.69-3.31-3.3zM16.81 6.36L3.27.03l10.23 10.23z"/></svg>
+          Google Play
+        </a>
+      </div>
+    </div>
+
+    <div class="screenshots">
+      <img src="assets/room_01.png" alt="ルーム1" class="screenshot">
+      <img src="assets/room_02.png" alt="ルーム2" class="screenshot">
+      <img src="assets/room_03.png" alt="ルーム3" class="screenshot">
+      <img src="assets/milk_happy.png" alt="ミルク" class="screenshot" style="object-fit: contain; background: rgba(255,255,255,0.05);">
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>ゲームの特徴</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="emoji">🐱</div>
+        <h3>かわいいキャラクター</h3>
+        <p>白猫のミルクと一緒に謎解きの旅へ。ヒントをくれる頼れる相棒です。</p>
+      </div>
+      <div class="feature-card">
+        <div class="emoji">🔐</div>
+        <h3>10のユニークなルーム</h3>
+        <p>部屋ごとに異なるテーマと謎解きパズルが登場します。</p>
+      </div>
+      <div class="feature-card">
+        <div class="emoji">🎮</div>
+        <h3>ミニゲーム搭載</h3>
+        <p>マカロン記憶ゲーム、バブルゲームなど多彩なミニゲームが楽しめます。</p>
+      </div>
+      <div class="feature-card">
+        <div class="emoji">🆓</div>
+        <h3>無料でプレイ</h3>
+        <p>基本プレイ無料。広告なしオプションも選べます。</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>
+      <a href="/nyanko/privacy-policy.html">プライバシーポリシー</a>
+      &nbsp;·&nbsp;
+      <a href="mailto:akiyu0901@gmail.com">お問い合わせ</a>
+    </p>
+    <p style="margin-top: 12px;">© 2026 Akiharu Hyuga</p>
+  </footer>
+
+  <script>
+    // 星を生成
+    const container = document.getElementById('stars');
+    for (let i = 0; i < 80; i++) {
+      const s = document.createElement('div');
+      s.className = 'star';
+      s.style.left = Math.random() * 100 + '%';
+      s.style.top = Math.random() * 100 + '%';
+      s.style.setProperty('--d', (2 + Math.random() * 4) + 's');
+      s.style.setProperty('--o', (0.3 + Math.random() * 0.7).toFixed(2));
+      s.style.animationDelay = (Math.random() * 4) + 's';
+      container.appendChild(s);
+    }
+  </script>
+
 </body>
 </html>
