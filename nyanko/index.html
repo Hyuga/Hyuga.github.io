@@ -120,6 +120,8 @@
       color: var(--text-md);
       line-height: 1.7;
     }
+    /* モバイルのみ強制改行、PCでは非表示 */
+    @media (min-width: 768px) { .mobile-br { display: none; } }
 
     .cta-group {
       display: flex; flex-direction: column;
@@ -131,6 +133,7 @@
       border-radius: 16px; text-decoration: none;
       font-family: 'Klee One', cursive;
       font-size: var(--fs-btn); font-weight: 600;
+      white-space: nowrap;
       transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s;
     }
     @media (hover: hover) {
@@ -355,8 +358,8 @@
     <div class="hero-identity">
       <img src="../assets/app_icon.png" alt="アプリアイコン" class="hero-icon">
       <div class="hero-text">
-        <h1 class="hero-title">もふふミルクとにゃんこ脱出ゲーム</h1>
-        <p class="hero-tagline">ふわふわ島の謎を解いて、ミルクと一緒に脱出しよう 🐾</p>
+        <h1 class="hero-title">もふふミルクと<br class="mobile-br">にゃんこ脱出ゲーム</h1>
+        <p class="hero-tagline">ふわふわ島の謎を解いて、<br class="mobile-br">ミルクと一緒に脱出しよう 🐾</p>
       </div>
     </div>
 
