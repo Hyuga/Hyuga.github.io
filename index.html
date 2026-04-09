@@ -3,281 +3,262 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>もふふミルクとにゃんこ脱出ゲーム</title>
-  <meta name="description" content="ふわふわの謎を解いて、ミルクと一緒に脱出しよう。かわいい白猫ミルクと10のルームを冒険する謎解き脱出ゲーム。">
-  <meta property="og:title" content="もふふミルクとにゃんこ脱出ゲーム">
-  <meta property="og:description" content="ふわふわの謎を解いて、ミルクと一緒に脱出しよう。かわいい白猫ミルクと10のルームを冒険する謎解き脱出ゲーム。">
-  <meta property="og:image" content="https://hyuga.github.io/assets/feature_graphic.png">
-  <meta property="og:url" content="https://hyuga.github.io/">
-  <meta property="og:type" content="website">
+  <title>Akiharu Hyuga — Apps</title>
+  <meta name="description" content="Akiharu Hyugaのゲームアプリ一覧">
+  <meta property="og:title"       content="Akiharu Hyuga — Apps">
+  <meta property="og:description" content="Akiharu Hyugaのゲームアプリ一覧">
+  <meta property="og:image"       content="https://hyuga.github.io/assets/app_icon.png">
+  <meta property="og:url"         content="https://hyuga.github.io/">
+  <meta property="og:type"        content="website">
+  <meta name="twitter:card"       content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
+    :root {
+      --cream:    #fef6f2;
+      --rose:     #f0a0b8;
+      --plum:     #6a4070;
+      --gold:     #f5c860;
+      --text-dk:  #3a2040;
+      --text-md:  #8a6090;
+      --text-lt:  #c0a0c8;
+      --card-bg:  rgba(255,255,255,.88);
+      --card-bd:  rgba(240,160,184,.3);
+      --fs-hero:  clamp(1.8rem, 5vw, 2.8rem);
+      --fs-body:  clamp(0.95rem, 2vw, 1.1rem);
+      --fs-small: clamp(0.85rem, 1.8vw, 1rem);
+      --fs-btn:   clamp(0.95rem, 2vw, 1.05rem);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
-      background: #1a0a2e;
-      color: #fff;
+      font-family: 'M PLUS Rounded 1c', sans-serif;
+      background: var(--cream);
+      color: var(--text-dk);
       min-height: 100vh;
+      display: flex; flex-direction: column;
+      overflow-x: hidden;
     }
 
-    /* Hero */
-    .hero {
-      position: relative;
-      width: 100%;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+    /* ── Background ── */
+    .bg {
+      position: fixed; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 10% 10%, #ffe4f4cc 0%, transparent 55%),
+        radial-gradient(ellipse 60% 40% at 90% 15%, #ead8ffaa 0%, transparent 50%),
+        radial-gradient(ellipse 70% 60% at 60% 90%, #ffd8c8aa 0%, transparent 55%),
+        #fef6f2;
+    }
+
+    /* ── Sparkles ── */
+    .sparkles { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+    .sp {
+      position: absolute; color: var(--cl, #f5c860);
+      font-size: var(--sz, 12px);
+      animation: sp-rise var(--dur, 7s) ease-in-out infinite var(--del, 0s);
+      opacity: 0;
+    }
+    @keyframes sp-rise {
+      0%   { opacity:0;  transform:translateY(0) scale(.7); }
+      30%  { opacity:.8; }
+      70%  { opacity:.3; }
+      100% { opacity:0;  transform:translateY(-70px) scale(1.3); }
+    }
+
+    /* ── Paw decorations ── */
+    .paws { position: fixed; inset:0; z-index:1; pointer-events:none; }
+    .paw  { position: absolute; font-size: var(--sz,1.2em); opacity: var(--op,.1); transform: rotate(var(--r,0deg)); }
+
+    /* ── Main ── */
+    .main {
+      position: relative; z-index: 2; flex: 1;
+      display: flex; flex-direction: column;
       align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      padding: 40px 20px;
+      padding: 56px 24px 48px;
+      max-width: 640px; margin: 0 auto; width: 100%;
     }
 
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, #1a0a2e 0%, #2d1b5e 40%, #1a3a5e 100%);
-      z-index: 0;
-    }
-
-    .stars {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      overflow: hidden;
-    }
-
-    .star {
-      position: absolute;
-      width: 3px;
-      height: 3px;
-      background: #fff;
+    /* ── Milk hero ── */
+    .milk-wrap { position: relative; margin-bottom: 12px; }
+    .milk-halo {
+      position: absolute; width: 240px; height: 240px;
       border-radius: 50%;
-      animation: twinkle var(--d, 3s) ease-in-out infinite alternate;
-      opacity: var(--o, 0.5);
+      background: radial-gradient(circle, rgba(240,160,184,.35) 0%, transparent 70%);
+      top:50%; left:50%; transform: translate(-50%,-50%);
+      animation: halo 3.5s ease-in-out infinite;
+    }
+    @keyframes halo {
+      0%,100% { transform:translate(-50%,-50%) scale(1);   opacity:.5; }
+      50%      { transform:translate(-50%,-50%) scale(1.2); opacity:1;  }
+    }
+    .milk-img {
+      width: 160px; height: 160px; object-fit: contain;
+      position: relative; z-index:1;
+      filter: drop-shadow(0 16px 32px rgba(200,100,140,.3));
+      animation: bob 4s ease-in-out infinite;
+    }
+    @keyframes bob {
+      0%,100% { transform:translateY(0) rotate(-2deg); }
+      50%      { transform:translateY(-16px) rotate(2deg); }
     }
 
-    @keyframes twinkle {
-      from { opacity: 0.2; transform: scale(0.8); }
-      to { opacity: 1; transform: scale(1.2); }
+    /* ── Developer title ── */
+    .dev-name {
+      font-family: 'Klee One', cursive;
+      font-size: var(--fs-hero); color: var(--plum);
+      letter-spacing: .04em; text-align: center;
+    }
+    .dev-sub {
+      font-size: var(--fs-small); color: var(--text-lt);
+      letter-spacing: .22em; margin-top: 6px; margin-bottom: 36px;
     }
 
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 24px;
-      max-width: 500px;
-      width: 100%;
+    /* ── Divider ── */
+    .divider {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 20px; width: 100%;
+    }
+    .divider::before, .divider::after {
+      content:''; flex:1; height:1px;
+    }
+    .divider::before { background: linear-gradient(to right, transparent, var(--rose)); }
+    .divider::after  { background: linear-gradient(to left,  transparent, var(--rose)); }
+    .divider span {
+      font-family:'Klee One',cursive;
+      font-size: var(--fs-small); color: var(--text-lt);
+      letter-spacing:.22em; white-space:nowrap;
     }
 
+    /* ── App showcase cards ── */
+    .apps { width: 100%; display: flex; flex-direction: column; gap: 20px; }
+
+    .app-card {
+      display: block; text-decoration: none; color: inherit;
+      background: var(--card-bg);
+      border: 1.5px solid var(--card-bd);
+      border-radius: 24px;
+      overflow: hidden;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 6px 28px rgba(200,140,180,.12);
+      transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s, border-color .3s;
+    }
+    .app-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      border-color: rgba(240,160,184,.55);
+      box-shadow: 0 18px 48px rgba(200,140,180,.22);
+    }
+
+    /* feature_graphic banner inside card */
+    .card-banner {
+      width: 100%; aspect-ratio: 1024/500;
+      overflow: hidden;
+    }
+    .card-banner img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+      transition: transform .4s ease;
+    }
+    .app-card:hover .card-banner img { transform: scale(1.03); }
+
+    /* card body */
+    .card-body {
+      padding: 18px 20px 20px;
+      display: flex; align-items: center; gap: 16px;
+    }
     .app-icon {
-      width: 120px;
-      height: 120px;
-      border-radius: 28px;
-      box-shadow: 0 20px 60px rgba(180, 120, 255, 0.4);
-      animation: float 4s ease-in-out infinite;
+      width: 60px; height: 60px;
+      border-radius: 14px; flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(200,140,180,.24);
     }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
+    .card-info { flex: 1; }
+    .card-info h2 {
+      font-family: 'Klee One', cursive;
+      font-size: var(--fs-body); color: var(--plum);
+      margin-bottom: 4px; line-height: 1.35;
     }
-
-    .title-logo {
-      width: 100%;
-      max-width: 360px;
-      filter: drop-shadow(0 4px 20px rgba(180, 120, 255, 0.6));
+    .card-info p {
+      font-size: var(--fs-small); color: var(--text-lt); line-height: 1.5;
     }
-
-    .tagline {
-      font-size: 1em;
-      color: #c9a8f5;
-      letter-spacing: 0.1em;
-      text-align: center;
-    }
-
-    .store-buttons {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 8px;
-    }
-
-    .store-btn {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 24px;
-      border-radius: 14px;
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.2);
-      color: #fff;
-      text-decoration: none;
-      backdrop-filter: blur(10px);
-      transition: all 0.2s;
-      font-size: 0.9em;
-    }
-
-    .store-btn:hover {
-      background: rgba(255,255,255,0.22);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(180,120,255,0.3);
-    }
-
-    .store-btn svg { width: 24px; height: 24px; fill: #fff; }
-
-    /* Screenshots */
-    .screenshots {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      gap: 12px;
-      margin-top: 32px;
-      overflow-x: auto;
-      padding: 8px 4px 16px;
-      scrollbar-width: none;
-    }
-
-    .screenshots::-webkit-scrollbar { display: none; }
-
-    .screenshot {
+    .card-cta {
       flex-shrink: 0;
-      width: 140px;
-      height: 250px;
-      object-fit: cover;
-      border-radius: 16px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-      border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; gap: 6px;
+      background: var(--rose); color: #fff;
+      font-family: 'Klee One', cursive;
+      font-size: var(--fs-btn); font-weight: 600;
+      padding: 10px 18px; border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(240,160,184,.45);
+      transition: box-shadow .2s, transform .2s;
+      white-space: nowrap;
+    }
+    .app-card:hover .card-cta {
+      box-shadow: 0 8px 24px rgba(240,160,184,.55);
+      transform: scale(1.04);
     }
 
-    /* Section */
-    .section {
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 60px 24px;
-    }
-
-    .section h2 {
-      font-size: 1.3em;
-      color: #c9a8f5;
-      margin-bottom: 20px;
-      letter-spacing: 0.05em;
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-    }
-
-    .feature-card {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 16px;
-      padding: 20px;
-    }
-
-    .feature-card .emoji { font-size: 2em; margin-bottom: 10px; }
-    .feature-card h3 { font-size: 0.95em; margin-bottom: 6px; color: #e8d5ff; }
-    .feature-card p { font-size: 0.85em; color: #a08abf; line-height: 1.6; }
-
-    /* Footer */
+    /* ── Footer ── */
     footer {
-      text-align: center;
-      padding: 40px 24px;
-      color: #6b5580;
-      font-size: 0.85em;
-      border-top: 1px solid rgba(255,255,255,0.06);
+      position: relative; z-index: 2;
+      text-align: center; padding: 28px 24px;
+      color: var(--text-lt); font-size: var(--fs-small);
     }
-
-    footer a { color: #9b78d4; text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
+<div class="bg"></div>
+<div class="sparkles" id="sp"></div>
+<div class="paws">
+  <span class="paw" aria-hidden="true" style="top:8%;  left:5%;  --r:22deg;  --sz:1.5em; --op:.09">🐾</span>
+  <span class="paw" aria-hidden="true" style="top:28%; right:6%; --r:-18deg; --sz:1.1em; --op:.08">🐾</span>
+  <span class="paw" aria-hidden="true" style="top:62%; left:7%;  --r:30deg;  --sz:1em;   --op:.08">🐾</span>
+  <span class="paw" aria-hidden="true" style="top:80%; right:5%; --r:-25deg; --sz:1.3em; --op:.09">🐾</span>
+</div>
 
-  <div class="hero">
-    <div class="hero-bg"></div>
-    <div class="stars" id="stars"></div>
-
-    <div class="hero-content">
-      <img src="assets/app_icon.png" alt="アプリアイコン" class="app-icon">
-      <img src="assets/title.png" alt="もふふミルクとにゃんこ脱出ゲーム" class="title-logo">
-      <p class="tagline">ふわふわの謎を解いて、ミルクと一緒に脱出しよう</p>
-
-      <div class="store-buttons">
-        <a href="https://apps.apple.com/jp/app/id6760703475" class="store-btn">
-          <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-          App Store
-        </a>
-        <a href="https://play.google.com/store/apps/details?id=com.moyachi.nekoEscapeGame" class="store-btn">
-          <svg viewBox="0 0 24 24"><path d="M3.18 23.76a2 2 0 0 1-.59-1.47V1.71A2 2 0 0 1 3.18.24L3.27.16l12.44 12.44v.29L3.27 25.33zM20.12 16.66l-3.31-3.31 3.31-3.31 3.75 2.13a2.13 2.13 0 0 1 0 3.73zM3.27 25.33l13.54-7.69-3.31-3.3zM16.81 6.36L3.27.03l10.23 10.23z"/></svg>
-          Google Play
-        </a>
-      </div>
-    </div>
-
-    <div class="screenshots">
-      <img src="assets/room_01.png" alt="ルーム1" class="screenshot">
-      <img src="assets/room_02.png" alt="ルーム2" class="screenshot">
-      <img src="assets/room_03.png" alt="ルーム3" class="screenshot">
-      <img src="assets/milk_happy.png" alt="ミルク" class="screenshot" style="object-fit: contain; background: rgba(255,255,255,0.05);">
-    </div>
+<div class="main">
+  <div class="milk-wrap">
+    <div class="milk-halo"></div>
+    <img src="assets/milk_happy.png" alt="ミルク" class="milk-img">
   </div>
 
-  <div class="section">
-    <h2>ゲームの特徴</h2>
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="emoji">🐱</div>
-        <h3>かわいいキャラクター</h3>
-        <p>白猫のミルクと一緒に謎解きの旅へ。ヒントをくれる頼れる相棒です。</p>
+  <h1 class="dev-name">Akiharu Hyuga</h1>
+  <p class="dev-sub">✦ Game Developer ✦</p>
+
+  <div class="divider"><span>APPS</span></div>
+
+  <div class="apps">
+    <a href="nyanko/" class="app-card">
+      <div class="card-banner">
+        <img src="assets/feature_graphic.png" alt="もふふミルクとにゃんこ脱出ゲーム">
       </div>
-      <div class="feature-card">
-        <div class="emoji">🔐</div>
-        <h3>10のユニークなルーム</h3>
-        <p>部屋ごとに異なるテーマと謎解きパズルが登場します。</p>
+      <div class="card-body">
+        <img src="assets/app_icon.png" alt="アイコン" class="app-icon">
+        <div class="card-info">
+          <h2>もふふミルクとにゃんこ脱出ゲーム</h2>
+          <p>ふわふわ島の謎を解いて、ミルクと一緒に脱出しよう</p>
+        </div>
+        <span class="card-cta">▶ 詳しく</span>
       </div>
-      <div class="feature-card">
-        <div class="emoji">🎮</div>
-        <h3>ミニゲーム搭載</h3>
-        <p>マカロン記憶ゲーム、バブルゲームなど多彩なミニゲームが楽しめます。</p>
-      </div>
-      <div class="feature-card">
-        <div class="emoji">🆓</div>
-        <h3>無料でプレイ</h3>
-        <p>基本プレイ無料。広告なしオプションも選べます。</p>
-      </div>
-    </div>
+    </a>
   </div>
+</div>
 
-  <footer>
-    <p>
-      <a href="/nyanko/privacy-policy.html">プライバシーポリシー</a>
-      &nbsp;·&nbsp;
-      <a href="mailto:akiyu0901@gmail.com">お問い合わせ</a>
-    </p>
-    <p style="margin-top: 12px;">© 2026 Akiharu Hyuga</p>
-  </footer>
+<footer>© 2026 Akiharu Hyuga</footer>
 
-  <script>
-    // 星を生成
-    const container = document.getElementById('stars');
-    for (let i = 0; i < 80; i++) {
-      const s = document.createElement('div');
-      s.className = 'star';
-      s.style.left = Math.random() * 100 + '%';
-      s.style.top = Math.random() * 100 + '%';
-      s.style.setProperty('--d', (2 + Math.random() * 4) + 's');
-      s.style.setProperty('--o', (0.3 + Math.random() * 0.7).toFixed(2));
-      s.style.animationDelay = (Math.random() * 4) + 's';
-      container.appendChild(s);
-    }
-  </script>
-
+<script>
+  const sp = document.getElementById('sp');
+  const syms   = ['✦','✧','⋆','·','✿','♡'];
+  const colors = ['#f5c860','#f0a0b8','#d4c5f0','#ffd0b8'];
+  for (let i = 0; i < 28; i++) {
+    const el = document.createElement('div');
+    el.className = 'sp';
+    el.textContent = syms[Math.floor(Math.random()*syms.length)];
+    el.style.left = Math.random()*100+'%';
+    el.style.top  = (5+Math.random()*85)+'%';
+    el.style.setProperty('--sz',  (10+Math.random()*10)+'px');
+    el.style.setProperty('--dur', (5+Math.random()*7)+'s');
+    el.style.setProperty('--del', (Math.random()*9)+'s');
+    el.style.setProperty('--cl',  colors[Math.floor(Math.random()*colors.length)]);
+    sp.appendChild(el);
+  }
+</script>
 </body>
 </html>

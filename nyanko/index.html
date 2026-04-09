@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>もふふミルクとにゃんこ脱出ゲーム</title>
+  <meta name="description" content="ふわふわの謎を解いて、ミルクと一緒に脱出しよう。かわいい白猫ミルクと10のルームを冒険する謎解き脱出ゲーム。">
+  <meta property="og:title"       content="もふふミルクとにゃんこ脱出ゲーム">
+  <meta property="og:description" content="ふわふわの謎を解いて、ミルクと一緒に脱出しよう。">
+  <meta property="og:image"       content="https://hyuga.github.io/nyanko/assets/feature_graphic.png">
+  <meta property="og:url"         content="https://hyuga.github.io/nyanko/">
+  <meta property="og:type"        content="website">
+  <meta name="twitter:card"       content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream:      #fef6f2;
+      --rose:       #f0a0b8;
+      --rose-dark:  #d4607a;
+      --plum:       #6a4070;
+      --gold:       #f5c860;
+      --text-dk:    #3a2040;
+      --text-md:    #8a6090;
+      --text-lt:    #c0a0c8;
+      --card-bg:    rgba(255,255,255,.82);
+      --card-bd:    rgba(240,160,184,.3);
+      --fs-hero:    clamp(1.6rem, 4vw, 2.4rem);
+      --fs-h2:      clamp(1.2rem, 3vw, 1.6rem);
+      --fs-body:    clamp(0.95rem, 2vw, 1.1rem);
+      --fs-small:   clamp(0.85rem, 1.8vw, 1rem);
+      --fs-btn:     clamp(1rem, 2.2vw, 1.15rem);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'M PLUS Rounded 1c', sans-serif;
+      background: var(--cream);
+      color: var(--text-dk);
+      overflow-x: hidden;
+      font-size: var(--fs-body);
+    }
+
+    /* ── Background ── */
+    .bg {
+      position: fixed; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 10% 10%, #ffe4f4cc 0%, transparent 55%),
+        radial-gradient(ellipse 60% 40% at 90% 15%, #ead8ffaa 0%, transparent 50%),
+        radial-gradient(ellipse 70% 60% at 60% 90%, #ffd8c8aa 0%, transparent 55%),
+        #fef6f2;
+    }
+
+    /* ── Sparkles ── */
+    .sparkles { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+    .sp {
+      position: absolute; color: var(--cl, #f5c860);
+      font-size: var(--sz, 12px);
+      animation: sp-rise var(--dur, 7s) ease-in-out infinite var(--del, 0s);
+      opacity: 0;
+    }
+    @keyframes sp-rise {
+      0%   { opacity: 0;   transform: translateY(0) scale(.7); }
+      30%  { opacity: .8; }
+      70%  { opacity: .3; }
+      100% { opacity: 0;   transform: translateY(-70px) scale(1.3); }
+    }
+
+    /* ── Back link ── */
+    .back {
+      position: fixed; top: 18px; left: 18px; z-index: 20;
+      font-family: 'Klee One', cursive;
+      font-size: var(--fs-small);
+      color: var(--text-md); text-decoration: none;
+      display: flex; align-items: center; gap: 4px;
+      background: rgba(255,255,255,.85); backdrop-filter: blur(12px);
+      padding: 8px 18px; border-radius: 24px;
+      border: 1.5px solid var(--card-bd);
+      transition: all .2s;
+    }
+    .back:hover { color: var(--plum); border-color: var(--rose); }
+
+    /* ── Page wrapper ── */
+    .page { position: relative; z-index: 2; }
+
+    /* ════════════════════════
+       HERO — Mobile
+    ════════════════════════ */
+    .hero {
+      padding: 72px 20px 32px;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 20px;
+      text-align: center;
+    }
+
+    .hero-banner {
+      width: 100%;
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 10px 40px rgba(200,100,140,.22);
+    }
+    .hero-banner img { width: 100%; display: block; }
+
+    .hero-identity {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 12px;
+    }
+    .hero-icon {
+      width: 88px; height: 88px;
+      border-radius: 20px;
+      box-shadow: 0 6px 24px rgba(200,100,140,.28);
+    }
+    .hero-title {
+      font-family: 'Klee One', cursive;
+      font-size: var(--fs-hero);
+      color: var(--plum);
+      line-height: 1.3;
+    }
+    .hero-tagline {
+      font-size: var(--fs-body);
+      color: var(--text-md);
+      line-height: 1.7;
+    }
+
+    .cta-group {
+      display: flex; flex-direction: column;
+      gap: 12px; width: 100%; max-width: 360px;
+    }
+    .cta-btn {
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; padding: 16px 24px;
+      border-radius: 16px; text-decoration: none;
+      font-family: 'Klee One', cursive;
+      font-size: var(--fs-btn); font-weight: 600;
+      transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s;
+    }
+    @media (hover: hover) {
+      .cta-btn:hover { transform: translateY(-3px) scale(1.02); }
+    }
+    .cta-btn svg { width: 24px; height: 24px; flex-shrink: 0; }
+
+    .cta-ios {
+      background: var(--rose);
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(240,160,184,.5);
+    }
+    .cta-ios:hover { box-shadow: 0 10px 28px rgba(240,160,184,.6); }
+    .cta-ios svg { fill: #fff; }
+
+    .cta-gp {
+      background: var(--card-bg);
+      color: var(--plum);
+      border: 2px solid var(--card-bd);
+      box-shadow: 0 4px 16px rgba(200,140,180,.12);
+    }
+    .cta-gp:hover { border-color: var(--rose); box-shadow: 0 8px 24px rgba(200,140,180,.2); }
+    .cta-gp svg { fill: var(--plum); }
+
+    /* ════════════════════════
+       HERO — PC (≥768px)
+    ════════════════════════ */
+    @media (min-width: 768px) {
+      .page { max-width: 920px; margin: 0 auto; padding: 0 36px; }
+
+      .hero {
+        padding: 88px 0 40px;
+        text-align: left;
+        align-items: flex-start;
+        gap: 28px;
+      }
+
+      .hero-banner { border-radius: 24px; }
+
+      .hero-identity {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 24px;
+      }
+      .hero-icon { width: 100px; height: 100px; border-radius: 24px; flex-shrink: 0; }
+      .hero-text { flex: 1; }
+      .hero-tagline { max-width: 540px; }
+
+      .cta-group {
+        flex-direction: row;
+        width: auto; max-width: none;
+        align-self: center;
+      }
+      .cta-btn { padding: 16px 32px; }
+    }
+
+    /* ════════════════════════
+       MILK STRIP
+    ════════════════════════ */
+    .milk-strip {
+      position: relative; z-index: 2;
+      background: rgba(255,240,248,.6);
+      border-top: 1px solid rgba(240,160,184,.2);
+      border-bottom: 1px solid rgba(240,160,184,.2);
+      padding: 20px 20px 16px;
+      display: flex; justify-content: center;
+      gap: 8px; flex-wrap: nowrap;
+      overflow-x: auto; scrollbar-width: none;
+    }
+    .milk-strip::-webkit-scrollbar { display: none; }
+
+    .milk-item {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 6px;
+      flex-shrink: 0; width: 72px;
+    }
+    .milk-item img {
+      width: 64px; height: 64px; object-fit: contain;
+      animation: bob var(--d, 4s) ease-in-out infinite var(--dl, 0s);
+      filter: drop-shadow(0 6px 12px rgba(200,100,140,.2));
+    }
+    @keyframes bob {
+      0%,100% { transform: translateY(0) rotate(-2deg); }
+      50%      { transform: translateY(-10px) rotate(2deg); }
+    }
+    .milk-item .serif {
+      font-family: 'Klee One', cursive;
+      font-size: .78rem; color: var(--text-md);
+      text-align: center; line-height: 1.35;
+      white-space: nowrap;
+    }
+
+    @media (min-width: 768px) {
+      .milk-strip { gap: 20px; padding: 28px 36px 20px; }
+      .milk-item { width: 108px; }
+      .milk-item img { width: 92px; height: 92px; }
+      .milk-item .serif { font-size: .9rem; }
+    }
+
+    /* ════════════════════════
+       SCREENSHOTS
+    ════════════════════════ */
+    .screenshots {
+      position: relative; z-index: 2;
+      padding: 40px 0 36px;
+      text-align: center;
+    }
+    .screenshots-title {
+      font-family: 'Klee One', cursive;
+      font-size: var(--fs-h2); color: var(--plum);
+      margin-bottom: 24px;
+    }
+    .screenshots-title::before,
+    .screenshots-title::after { content: ' ✦ '; color: var(--rose); }
+
+    .shots-track {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      padding: 12px 24px 20px;
+      justify-content: flex-start;
+    }
+    .shots-track::-webkit-scrollbar { display: none; }
+
+    .shot {
+      flex-shrink: 0;
+      width: 160px;
+      scroll-snap-align: start;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 28px rgba(200,100,140,.22);
+      transition: transform .3s cubic-bezier(.34,1.56,.64,1);
+    }
+    .shot:hover { transform: scale(1.04) translateY(-6px); box-shadow: 0 16px 40px rgba(200,100,140,.32); }
+    .shot img { width: 100%; display: block; }
+
+    @media (min-width: 768px) {
+      .screenshots { padding: 48px 0 40px; max-width: 1100px; margin: 0 auto; }
+      .shots-track {
+        justify-content: center;
+        padding: 16px 36px 24px;
+        gap: 24px;
+      }
+      .shot { width: 200px; }
+    }
+
+    /* ════════════════════════
+       FEATURES
+    ════════════════════════ */
+    .features { padding: 36px 20px 0; }
+    .features-title {
+      font-family: 'Klee One', cursive;
+      font-size: var(--fs-h2); color: var(--plum);
+      text-align: center; margin-bottom: 24px;
+    }
+    .features-title::before,
+    .features-title::after { content: ' ✦ '; color: var(--rose); }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .feat-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--card-bd);
+      border-radius: 20px; padding: 20px 16px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 4px 16px rgba(200,140,180,.08);
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; gap: 8px;
+      transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s;
+    }
+    .feat-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(200,140,180,.16); }
+    .feat-milk {
+      width: 64px; height: 64px; object-fit: contain;
+      filter: drop-shadow(0 4px 10px rgba(200,100,140,.2));
+    }
+    .feat-card h3 {
+      font-family: 'Klee One', cursive;
+      font-size: clamp(0.82rem, 1.8vw, 0.95rem); color: var(--plum);
+      overflow: hidden; text-overflow: ellipsis;
+    }
+    .feat-card p { font-size: var(--fs-small); color: var(--text-lt); line-height: 1.6; }
+
+    @media (min-width: 768px) {
+      .features { padding: 44px 0 0; }
+      .features-grid { grid-template-columns: repeat(4,1fr); gap: 14px; }
+      .feat-card { padding: 24px 12px; }
+      .feat-milk { width: 84px; height: 84px; }
+    }
+
+    /* ════════════════════════
+       FOOTER
+    ════════════════════════ */
+    footer {
+      position: relative; z-index: 2;
+      text-align: center; padding: 40px 20px;
+      border-top: 1px solid rgba(240,160,184,.2);
+      color: var(--text-lt); font-size: var(--fs-small);
+      margin-top: 44px;
+      max-width: 920px; margin-left: auto; margin-right: auto; width: 100%;
+    }
+    footer a { color: var(--rose); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    footer p + p { margin-top: 8px; }
+  </style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="sparkles" id="sp"></div>
+<a href="../" class="back">‹ Apps</a>
+
+<div class="page">
+  <section class="hero">
+    <div class="hero-banner">
+      <img src="assets/feature_graphic.png" alt="もふふミルクとにゃんこ脱出ゲーム">
+    </div>
+
+    <div class="hero-identity">
+      <img src="../assets/app_icon.png" alt="アプリアイコン" class="hero-icon">
+      <div class="hero-text">
+        <h1 class="hero-title">もふふミルクとにゃんこ脱出ゲーム</h1>
+        <p class="hero-tagline">ふわふわ島の謎を解いて、ミルクと一緒に脱出しよう 🐾</p>
+      </div>
+    </div>
+
+    <div class="cta-group">
+      <a href="https://apps.apple.com/jp/app/id6760703475" class="cta-btn cta-ios">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        App Store でダウンロード
+      </a>
+      <a href="https://play.google.com/store/apps/details?id=com.moyachi.nekoEscapeGame" class="cta-btn cta-gp">
+        <svg viewBox="0 0 24 26" xmlns="http://www.w3.org/2000/svg"><path d="M3.18 23.76a2 2 0 0 1-.59-1.47V1.71A2 2 0 0 1 3.18.24L3.27.16l12.44 12.44v.29L3.27 25.33zM20.12 16.66l-3.31-3.31 3.31-3.31 3.75 2.13a2.13 2.13 0 0 1 0 3.73zM3.27 25.33l13.54-7.69-3.31-3.3zM16.81 6.36L3.27.03l10.23 10.23z"/></svg>
+        Google Play でダウンロード
+      </a>
+    </div>
+  </section>
+</div>
+
+<!-- MILK STRIP -->
+<div class="milk-strip">
+  <div class="milk-item">
+    <img src="../assets/milk_excited.png" alt="ミルク（excited）" style="--d:3.8s;--dl:0s">
+    <span class="serif">謎解き<br>たのしい♪</span>
+  </div>
+  <div class="milk-item">
+    <img src="../assets/milk_happy.png" alt="ミルク（happy）" style="--d:4.2s;--dl:.6s">
+    <span class="serif">いっしょに<br>あそぼ！</span>
+  </div>
+  <div class="milk-item">
+    <img src="../assets/milk_normal.png" alt="ミルク（normal）" style="--d:4s;--dl:1.2s">
+    <span class="serif">ヒントは<br>まかせて</span>
+  </div>
+  <div class="milk-item">
+    <img src="../assets/milk_thinking.png" alt="ミルク（thinking）" style="--d:3.6s;--dl:1.8s">
+    <span class="serif">うーん…<br>むずかしい</span>
+  </div>
+  <div class="milk-item">
+    <img src="../assets/milk_sad.png" alt="ミルク（sad）" style="--d:4.4s;--dl:2.4s">
+    <span class="serif">まだ<br>脱出できない</span>
+  </div>
+</div>
+
+<!-- SCREENSHOTS -->
+<section class="screenshots">
+  <h2 class="screenshots-title">ゲーム画面</h2>
+  <div class="shots-track">
+    <div class="shot"><img src="assets/store1.png" alt="タイトル画面" loading="lazy"></div>
+    <div class="shot"><img src="assets/store2.png" alt="ミルクのおへや" loading="lazy"></div>
+    <div class="shot"><img src="assets/store3.png" alt="おひるねサンルーム" loading="lazy"></div>
+    <div class="shot"><img src="assets/store4.png" alt="マカロン記憶ゲーム" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<div class="page">
+  <section class="features">
+    <h2 class="features-title">ゲームの特徴</h2>
+    <div class="features-grid">
+      <div class="feat-card">
+        <img src="../assets/milk_happy.png" class="feat-milk" alt="ミルク" loading="lazy">
+        <h3>かわいいキャラクター</h3>
+        <p>白猫のミルクが謎解きを一緒に楽しんでくれます</p>
+      </div>
+      <div class="feat-card">
+        <img src="../assets/milk_thinking.png" class="feat-milk" alt="ミルク" loading="lazy">
+        <h3>10のユニークなルーム</h3>
+        <p>部屋ごとに異なるテーマと謎解きパズルが登場</p>
+      </div>
+      <div class="feat-card">
+        <img src="../assets/milk_excited.png" class="feat-milk" alt="ミルク" loading="lazy">
+        <h3>ミニゲーム搭載</h3>
+        <p>マカロン記憶ゲーム、バブルゲームなど多彩</p>
+      </div>
+      <div class="feat-card">
+        <img src="../assets/milk_normal.png" class="feat-milk" alt="ミルク" loading="lazy">
+        <h3>無料でプレイ</h3>
+        <p>基本プレイ無料。広告なしオプションも選べます</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <p>
+    <a href="privacy-policy.html">プライバシーポリシー</a>
+    &nbsp;·&nbsp;
+    <a href="mailto:akiyu0901@gmail.com">お問い合わせ</a>
+    &nbsp;·&nbsp;
+    <a href="../">← すべてのアプリ</a>
+  </p>
+  <p>© 2026 Akiharu Hyuga</p>
+</footer>
+
+<script>
+  const sp = document.getElementById('sp');
+  const syms   = ['✦','✧','⋆','·','✿','♡'];
+  const colors = ['#f5c860','#f0a0b8','#d4c5f0','#ffd0b8'];
+  for (let i = 0; i < 28; i++) {
+    const el = document.createElement('div');
+    el.className = 'sp';
+    el.textContent = syms[Math.floor(Math.random()*syms.length)];
+    el.style.left = Math.random()*100+'%';
+    el.style.top  = (5+Math.random()*85)+'%';
+    el.style.setProperty('--sz',  (10+Math.random()*10)+'px');
+    el.style.setProperty('--dur', (5+Math.random()*7)+'s');
+    el.style.setProperty('--del', (Math.random()*9)+'s');
+    el.style.setProperty('--cl',  colors[Math.floor(Math.random()*colors.length)]);
+    sp.appendChild(el);
+  }
+</script>
+</body>
+</html>
