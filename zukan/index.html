@@ -356,7 +356,9 @@
 <div class="page">
   <section class="hero">
     <div class="hero-banner">
-      <img src="assets/feature_graphic.png" alt="もふふミルクのにゃんこ図鑑">
+      <img src="assets/feature_graphic.png" alt="もふふミルクのにゃんこ図鑑"
+           data-src-ja="assets/feature_graphic.png"
+           data-src-en="assets/feature_graphic.png">
     </div>
 
     <div class="hero-identity">
@@ -386,11 +388,11 @@
     <span class="en">Screenshots</span>
   </h2>
   <div class="shots-track">
-    <div class="shot"><img src="assets/store1.png" alt="Title" loading="lazy"></div>
-    <div class="shot"><img src="assets/store2.png" alt="Care" loading="lazy"></div>
-    <div class="shot"><img src="assets/store3.png" alt="Friends" loading="lazy"></div>
-    <div class="shot"><img src="assets/store4.png" alt="Cat Album" loading="lazy"></div>
-    <div class="shot"><img src="assets/store5.png" alt="Chat" loading="lazy"></div>
+    <div class="shot"><img src="assets/store1.png" data-src-ja="assets/store1.png" data-src-en="assets/store1_en.png" alt="Title" loading="lazy"></div>
+    <div class="shot"><img src="assets/store2.png" data-src-ja="assets/store2.png" data-src-en="assets/store2_en.png" alt="Care" loading="lazy"></div>
+    <div class="shot"><img src="assets/store3.png" data-src-ja="assets/store3.png" data-src-en="assets/store3_en.png" alt="Friends" loading="lazy"></div>
+    <div class="shot"><img src="assets/store4.png" data-src-ja="assets/store4.png" data-src-en="assets/store4_en.png" alt="Cat Album" loading="lazy"></div>
+    <div class="shot"><img src="assets/store5.png" data-src-ja="assets/store5.png" data-src-en="assets/store5_en.png" alt="Museum" loading="lazy"></div>
   </div>
 </section>
 
@@ -498,6 +500,10 @@
     document.getElementById('btn-en').classList.toggle('active',  isEn);
     document.getElementById('privacy-link').href =
       isEn ? 'privacy-policy-en.html' : 'privacy-policy.html';
+    // swap localizable images
+    document.querySelectorAll('img[data-src-ja]').forEach(img => {
+      img.src = isEn ? img.dataset.srcEn : img.dataset.srcJa;
+    });
     localStorage.setItem('zukan-lang', lang);
   }
 
