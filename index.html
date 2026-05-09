@@ -48,6 +48,32 @@
       overflow-x: hidden;
     }
 
+    /* ── Language switching ── */
+    .en { display: none; }
+    .lang-en .ja { display: none; }
+    .lang-en .en { display: inline; }
+
+    /* ── Language toggle ── */
+    .lang-toggle {
+      position: fixed; top: 18px; right: 18px; z-index: 20;
+      display: flex;
+      background: rgba(255,255,255,.85); backdrop-filter: blur(12px);
+      border-radius: 24px;
+      border: 1.5px solid var(--card-bd);
+      overflow: hidden;
+      font-family: 'Klee One', cursive;
+      font-size: var(--fs-small);
+    }
+    .lang-btn {
+      background: none; border: none; cursor: pointer;
+      padding: 8px 16px;
+      color: var(--text-md);
+      font-family: inherit; font-size: inherit;
+      transition: background .2s, color .2s;
+    }
+    .lang-btn.active { background: var(--rose); color: #fff; }
+    .lang-btn:not(.active):hover { color: var(--plum); }
+
     /* ── Background ── */
     .bg {
       position: fixed; inset: 0; z-index: 0;
@@ -241,6 +267,12 @@
   <span class="paw" aria-hidden="true" style="top:80%; right:5%; --r:-25deg; --sz:1.3em; --op:.09">🐾</span>
 </div>
 
+<!-- Language toggle -->
+<div class="lang-toggle">
+  <button class="lang-btn active" id="btn-ja" onclick="setLang('ja')">JA</button>
+  <button class="lang-btn"        id="btn-en" onclick="setLang('en')">EN</button>
+</div>
+
 <div class="main">
   <div class="milk-wrap">
     <div class="milk-halo"></div>
@@ -259,19 +291,33 @@
       </div>
       <div class="card-body">
         <img src="assets/app_icon.png" alt="アイコン" class="app-icon">
-        <p class="card-desc">ふわふわ島の謎を解いて、ミルクと一緒に脱出しよう</p>
-        <span class="card-cta">▶ 詳しく</span>
+        <p class="card-desc">
+          <span class="ja">ふわふわ島の謎を解いて、ミルクと一緒に脱出しよう</span>
+          <span class="en">Solve the mysteries of Fluffy Island and escape with Milk!</span>
+        </p>
+        <span class="card-cta">
+          <span class="ja">▶ 詳しく</span>
+          <span class="en">▶ Details</span>
+        </span>
       </div>
     </a>
 
     <a href="zukan/" class="app-card">
       <div class="card-banner">
-        <img src="zukan/assets/feature_graphic.png" alt="もふふミルクのにゃんこ図鑑">
+        <img src="zukan/assets/feature_graphic.png" alt="もふふミルクのにゃんこ図鑑"
+             data-src-ja="zukan/assets/feature_graphic.png"
+             data-src-en="zukan/assets/feature_graphic_en.png">
       </div>
       <div class="card-body">
         <img src="zukan/assets/app_icon.png" alt="アイコン" class="app-icon">
-        <p class="card-desc">ふわふわ島の猫たちをお世話して、にゃんこ図鑑を完成させよう</p>
-        <span class="card-cta">▶ 詳しく</span>
+        <p class="card-desc">
+          <span class="ja">ふわふわ島の猫たちをお世話して、にゃんこ図鑑を完成させよう</span>
+          <span class="en">Care for cats on Fluffy Island and complete your Cat Album!</span>
+        </p>
+        <span class="card-cta">
+          <span class="ja">▶ 詳しく</span>
+          <span class="en">▶ Details</span>
+        </span>
       </div>
     </a>
   </div>
@@ -295,6 +341,22 @@
     el.style.setProperty('--cl',  colors[Math.floor(Math.random()*colors.length)]);
     sp.appendChild(el);
   }
+
+  /* ── Language toggle ── */
+  function setLang(lang) {
+    const isEn = lang === 'en';
+    document.body.classList.toggle('lang-en', isEn);
+    document.documentElement.lang = lang;
+    document.getElementById('btn-ja').classList.toggle('active', !isEn);
+    document.getElementById('btn-en').classList.toggle('active',  isEn);
+    document.querySelectorAll('img[data-src-ja]').forEach(img => {
+      img.src = isEn ? img.dataset.srcEn : img.dataset.srcJa;
+    });
+    localStorage.setItem('hyuga-lang', lang);
+  }
+
+  const saved = localStorage.getItem('hyuga-lang');
+  if (saved === 'en') setLang('en');
 </script>
 </body>
 </html>
