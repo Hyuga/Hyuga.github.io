@@ -41,6 +41,34 @@
       font-size: var(--fs-body);
     }
 
+    /* ── Language switching ── */
+    .en { display: none; }
+    .lang-en .ja { display: none; }
+    .lang-en .en { display: inline; }
+    .lang-en .en-block { display: block; }
+    .lang-en .feat-card p { word-break: normal; overflow-wrap: normal; }
+
+    /* ── Language toggle ── */
+    .lang-toggle {
+      position: fixed; top: 18px; right: 18px; z-index: 20;
+      display: flex;
+      background: rgba(255,255,255,.85); backdrop-filter: blur(12px);
+      border-radius: 24px;
+      border: 1.5px solid var(--card-bd);
+      overflow: hidden;
+      font-family: 'Klee One', cursive;
+      font-size: var(--fs-small);
+    }
+    .lang-btn {
+      background: none; border: none; cursor: pointer;
+      padding: 8px 16px;
+      color: var(--text-md);
+      font-family: inherit; font-size: inherit;
+      transition: background .2s, color .2s;
+    }
+    .lang-btn.active { background: var(--rose); color: #fff; }
+    .lang-btn:not(.active):hover { color: var(--plum); }
+
     /* ── Background ── */
     .bg {
       position: fixed; inset: 0; z-index: 0;
@@ -319,6 +347,12 @@
 <div class="sparkles" id="sp"></div>
 <a href="../" class="back">‹ Apps</a>
 
+<!-- Language toggle -->
+<div class="lang-toggle">
+  <button class="lang-btn active" id="btn-ja" onclick="setLang('ja')">JA</button>
+  <button class="lang-btn"        id="btn-en" onclick="setLang('en')">EN</button>
+</div>
+
 <div class="page">
   <section class="hero">
     <div class="hero-banner">
@@ -326,16 +360,20 @@
     </div>
 
     <div class="hero-identity">
-      <img src="assets/app_icon.png" alt="アプリアイコン" class="hero-icon">
+      <img src="assets/app_icon.png" alt="App Icon" class="hero-icon">
       <div class="hero-text">
-        <p class="hero-tagline">ふわふわ島の猫たちをお世話して、にゃんこ図鑑を完成させよう。</p>
+        <p class="hero-tagline">
+          <span class="ja">ふわふわ島の猫たちをお世話して、にゃんこ図鑑を完成させよう。</span>
+          <span class="en">Care for cats on Fluffy Island and complete your Cat Album.</span>
+        </p>
       </div>
     </div>
 
     <div class="cta-group">
       <a href="https://apps.apple.com/jp/app/%E3%82%82%E3%81%B5%E3%81%B5%E3%83%9F%E3%83%AB%E3%82%AF%E3%81%AE%E3%81%AB%E3%82%83%E3%82%93%E3%81%93%E5%9B%B3%E9%91%91/id6765667055" class="cta-btn cta-ios">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        AppStoreで予約登録中にゃ！
+        <span class="ja">AppStoreで予約登録中にゃ！</span>
+        <span class="en">Pre-register on the App Store!</span>
       </a>
     </div>
   </section>
@@ -343,40 +381,70 @@
 
 <!-- SCREENSHOTS -->
 <section class="screenshots">
-  <h2 class="screenshots-title">ゲーム画面</h2>
+  <h2 class="screenshots-title">
+    <span class="ja">ゲーム画面</span>
+    <span class="en">Screenshots</span>
+  </h2>
   <div class="shots-track">
-    <div class="shot"><img src="assets/store1.png" alt="タイトル画面" loading="lazy"></div>
-    <div class="shot"><img src="assets/store2.png" alt="お世話画面" loading="lazy"></div>
-    <div class="shot"><img src="assets/store3.png" alt="なかま画面" loading="lazy"></div>
-    <div class="shot"><img src="assets/store4.png" alt="にゃんこ図鑑" loading="lazy"></div>
-    <div class="shot"><img src="assets/store5.png" alt="ミルクとおはなし" loading="lazy"></div>
+    <div class="shot"><img src="assets/store1.png" alt="Title" loading="lazy"></div>
+    <div class="shot"><img src="assets/store2.png" alt="Care" loading="lazy"></div>
+    <div class="shot"><img src="assets/store3.png" alt="Friends" loading="lazy"></div>
+    <div class="shot"><img src="assets/store4.png" alt="Cat Album" loading="lazy"></div>
+    <div class="shot"><img src="assets/store5.png" alt="Chat" loading="lazy"></div>
   </div>
 </section>
 
 <!-- FEATURES -->
 <div class="page">
   <section class="features">
-    <h2 class="features-title">ゲームの特徴</h2>
+    <h2 class="features-title">
+      <span class="ja">ゲームの特徴</span>
+      <span class="en">Features</span>
+    </h2>
     <div class="features-grid">
       <div class="feat-card">
-        <img src="assets/milk_happy.png" class="feat-milk" alt="ミルク" loading="lazy">
-        <h3>図鑑をコンプリート！</h3>
-        <p>かわいいにゃんこたちを育てて図鑑をうめていこう</p>
+        <img src="assets/milk_happy.png" class="feat-milk" alt="Milk" loading="lazy">
+        <h3>
+          <span class="ja">図鑑をコンプリート！</span>
+          <span class="en">Fill the Cat Album!</span>
+        </h3>
+        <p>
+          <span class="ja">かわいいにゃんこたちを育てて図鑑をうめていこう</span>
+          <span class="en">Raise adorable cats and fill your Cat Album one by one.</span>
+        </p>
       </div>
       <div class="feat-card">
-        <img src="assets/milk_waiting.png" class="feat-milk" alt="ミルク" loading="lazy">
-        <h3>世代をつなぐ歴史</h3>
-        <p>世代をつなぎながら、にゃんこ家族の歴史を紡ごう</p>
+        <img src="assets/milk_waiting.png" class="feat-milk" alt="Milk" loading="lazy">
+        <h3>
+          <span class="ja">世代をつなぐ歴史</span>
+          <span class="en">A Family History</span>
+        </h3>
+        <p>
+          <span class="ja">世代をつなぎながら、にゃんこ家族の歴史を紡ごう</span>
+          <span class="en">Connect the generations and weave your cat family's story.</span>
+        </p>
       </div>
       <div class="feat-card">
-        <img src="assets/milk_pleading.png" class="feat-milk" alt="ミルク" loading="lazy">
-        <h3>ミルクと会話できる</h3>
-        <p>白猫ミルクとおしゃべりしながら絆を深めよう</p>
+        <img src="assets/milk_pleading.png" class="feat-milk" alt="Milk" loading="lazy">
+        <h3>
+          <span class="ja">ミルクと会話できる</span>
+          <span class="en">Chat with Milk</span>
+        </h3>
+        <p>
+          <span class="ja">白猫ミルクとおしゃべりしながら絆を深めよう</span>
+          <span class="en">Bond with Milk, the fluffy white cat, through daily chat.</span>
+        </p>
       </div>
       <div class="feat-card">
-        <img src="assets/milk_normal_01.png" class="feat-milk" alt="ミルク" loading="lazy">
-        <h3>お世話で絆を深めよう</h3>
-        <p>ごはん・遊び・なでるで、毎日少しずつ仲良くなろう</p>
+        <img src="assets/milk_normal_01.png" class="feat-milk" alt="Milk" loading="lazy">
+        <h3>
+          <span class="ja">お世話で絆を深めよう</span>
+          <span class="en">Daily Care &amp; Bonding</span>
+        </h3>
+        <p>
+          <span class="ja">ごはん・遊び・なでるで、毎日少しずつ仲良くなろう</span>
+          <span class="en">Feed, play, and pet your cats to deepen bonds, day by day.</span>
+        </p>
       </div>
     </div>
   </section>
@@ -384,16 +452,26 @@
 
 <footer>
   <p>
-    <a href="privacy-policy.html">プライバシーポリシー</a>
+    <a id="privacy-link" href="privacy-policy.html">
+      <span class="ja">プライバシーポリシー</span>
+      <span class="en">Privacy Policy</span>
+    </a>
     &nbsp;·&nbsp;
-    <a href="mailto:akiyu0901@gmail.com">お問い合わせ</a>
+    <a href="mailto:akiyu0901@gmail.com">
+      <span class="ja">お問い合わせ</span>
+      <span class="en">Contact</span>
+    </a>
     &nbsp;·&nbsp;
-    <a href="../">← すべてのアプリ</a>
+    <a href="../">
+      <span class="ja">← すべてのアプリ</span>
+      <span class="en">← All Apps</span>
+    </a>
   </p>
   <p>© 2026 Akiharu Hyuga</p>
 </footer>
 
 <script>
+  /* ── Sparkles ── */
   const sp = document.getElementById('sp');
   const syms   = ['✦','✧','⋆','·','✿','♡'];
   const colors = ['#f5c860','#f0a0b8','#d4c5f0','#ffd0e8'];
@@ -409,6 +487,22 @@
     el.style.setProperty('--cl',  colors[Math.floor(Math.random()*colors.length)]);
     sp.appendChild(el);
   }
+
+  /* ── Language toggle ── */
+  function setLang(lang) {
+    const isEn = lang === 'en';
+    document.body.classList.toggle('lang-en', isEn);
+    document.documentElement.lang = lang;
+    document.title = isEn ? 'Mofufu Milk: Cat Family' : 'もふふミルクのにゃんこ図鑑';
+    document.getElementById('btn-ja').classList.toggle('active', !isEn);
+    document.getElementById('btn-en').classList.toggle('active',  isEn);
+    document.getElementById('privacy-link').href =
+      isEn ? 'privacy-policy-en.html' : 'privacy-policy.html';
+    localStorage.setItem('zukan-lang', lang);
+  }
+
+  const saved = localStorage.getItem('zukan-lang');
+  if (saved === 'en') setLang('en');
 </script>
 </body>
 </html>
