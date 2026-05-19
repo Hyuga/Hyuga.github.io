@@ -1,0 +1,145 @@
+{
+  "updated": "2026-05-19T17:02:31.533854+09:00",
+  "articles": [
+    {
+      "title": "【非エンジニア向け】個人開発者こそやるべき、Claude Code丸投げで出来るQAテストとは？",
+      "url": "https://note.com/natty_yarrow1907/n/n2e9de98bb2f7",
+      "pubDate": "Tue, 19 May 2026 09:21:09 +0900",
+      "thumbnail": null,
+      "description": "〜★1祭りから自分のアプリを守る、リリース前最後の関門〜続きをみる"
+    },
+    {
+      "title": "個人開発者よ、リリース前に予約公開しないのは損です",
+      "url": "https://note.com/natty_yarrow1907/n/n92e6cc1e41a2",
+      "pubDate": "Tue, 12 May 2026 13:00:10 +0900",
+      "thumbnail": null,
+      "description": "〜設定半日・費用ゼロで効くメリット5選+1〜続きをみる"
+    },
+    {
+      "title": "個人開発のリリース前夜、これだけやれば爆睡できる3つの準備",
+      "url": "https://note.com/natty_yarrow1907/n/n45a91f844ffa",
+      "pubDate": "Mon, 11 May 2026 14:55:32 +0900",
+      "thumbnail": null,
+      "description": "〜Firebaseだけで完結する、リリースの安全網〜続きをみる"
+    },
+    {
+      "title": "Androidの自宅住所問題の次に来る話、iOSと特定商取引法、個人開発者がやるべきこと",
+      "url": "https://note.com/natty_yarrow1907/n/ne2718b0626e3",
+      "pubDate": "Sun, 10 May 2026 10:41:13 +0900",
+      "thumbnail": null,
+      "description": "〜Appleは住所を強制公開しない。でも日本の法律は、Appleとは無関係だった〜続きをみる"
+    },
+    {
+      "title": "個人開発でGoogle Playに課金を追加したら、自宅住所が世界中に公開されていた話",
+      "url": "https://note.com/natty_yarrow1907/n/n9d7ba73d3e6d",
+      "pubDate": "Sat, 09 May 2026 14:34:59 +0900",
+      "thumbnail": null,
+      "description": "〜「収益化=住所公開」という罠を、誰も教えてくれなかった〜続きをみる"
+    },
+    {
+      "title": "【完全保存版】個人開発者のローカライズ完全ガイド",
+      "url": "https://note.com/natty_yarrow1907/n/n31cbe79386a5",
+      "pubDate": "Fri, 08 May 2026 18:23:56 +0900",
+      "thumbnail": null,
+      "description": "AI時代の全工程「何を、いつ判断するか」を全部整理しました続きをみる"
+    },
+    {
+      "title": "AIに「なぜダメだったか分かる?」と諭していた私が、マネージャー脳を捨てたら開発が爆速になった話",
+      "url": "https://note.com/natty_yarrow1907/n/n3335ba82531a",
+      "pubDate": "Thu, 07 May 2026 15:08:45 +0900",
+      "thumbnail": null,
+      "description": "〜マネジメント研修の\"正解\"が、AI相手では完全に空振りだった話〜続きをみる"
+    },
+    {
+      "title": "可愛すぎる現実連動型育成ゲーム、爆誕。「もふふミルクのにゃんこ図鑑」予約登録、開始しました",
+      "url": "https://note.com/natty_yarrow1907/n/n92f0c280c5ef",
+      "pubDate": "Tue, 05 May 2026 10:40:04 +0900",
+      "thumbnail": null,
+      "description": "あなたの毎日がもっともふふに。もっと幸せに。 続きをみる"
+    },
+    {
+      "title": "完全バイブコーディングで、見て・触って・会話できる育成ゲームを作っています。まもなく完成させます",
+      "url": "https://note.com/natty_yarrow1907/n/nb59fe110eb6d",
+      "pubDate": "Fri, 01 May 2026 19:12:28 +0900",
+      "thumbnail": null,
+      "description": "〜現実連動型育成ゲーム「もふふミルクのにゃんこ図鑑」、予約登録もうすぐ開始〜続きをみる"
+    },
+    {
+      "title": "ドラクエ風RPGをAIで作ろうとしたら30年前の人類が神だった話",
+      "url": "https://note.com/natty_yarrow1907/n/ne296d8988392",
+      "pubDate": "Thu, 30 Apr 2026 16:14:17 +0900",
+      "thumbnail": null,
+      "description": "育成ゲームの息抜きに新作を試したら、ドラクエの偉大さに気づいた続きをみる"
+    },
+    {
+      "title": "非エンジニアの私がAIで作った個人開発ゲームのCM、本物のレベルに到達したので見てほしい",
+      "url": "https://note.com/natty_yarrow1907/n/na79950f8c66e",
+      "pubDate": "Tue, 28 Apr 2026 10:20:23 +0900",
+      "thumbnail": null,
+      "description": "Claude Codeで91点だった動画が、別ツールで\"次元\"が変わった話続きをみる"
+    },
+    {
+      "title": "モチベ上げるために収益ダッシュボードを作ったら、「赤字18,431円」と殴られた話",
+      "url": "https://note.com/natty_yarrow1907/n/n65c24761da0e",
+      "pubDate": "Mon, 27 Apr 2026 18:12:07 +0900",
+      "thumbnail": null,
+      "description": "非エンジニアが個人開発アプリを出した後に待っていた、数字のリアル続きをみる"
+    },
+    {
+      "title": "「それ2週間前に変えたよね？」とAIを詰めた私が、自分のメモを見て凍りついた話",
+      "url": "https://note.com/natty_yarrow1907/n/n5639c7cec256",
+      "pubDate": "Sat, 25 Apr 2026 12:34:36 +0900",
+      "thumbnail": null,
+      "description": "非エンジニアがAIを責めていたら、悪かったのは自分だった続きをみる"
+    },
+    {
+      "title": "非エンジニアの私がAIにゲームのCM作らせたら素人以下だった。指示に1行足したら9割マシになった話",
+      "url": "https://note.com/natty_yarrow1907/n/n7ce9dec2658a",
+      "pubDate": "Fri, 24 Apr 2026 17:56:01 +0900",
+      "thumbnail": null,
+      "description": "コード書けない個人開発者が、AIに\"合格点\"を出させるためにやっておくべきたった1つのこと続きをみる"
+    },
+    {
+      "title": "非エンジニアの私が「AIに毎回同じ注意してる」問題を解決したら、作業がぐんと進んだ話",
+      "url": "https://note.com/natty_yarrow1907/n/n3f236eec8565",
+      "pubDate": "Thu, 23 Apr 2026 12:19:45 +0900",
+      "thumbnail": null,
+      "description": "コード書けない個人開発者が、\"最初の半日\"でやっておくべきたった1つのこと続きをみる"
+    },
+    {
+      "title": "CLAUDE.mdを育てる、の先にあったもの — Claude Codeに\"組織設計\"を持ち込んだ話",
+      "url": "https://note.com/natty_yarrow1907/n/ne84fd196c4c1",
+      "pubDate": "Wed, 22 Apr 2026 14:07:08 +0900",
+      "thumbnail": null,
+      "description": "ハネムーン期3部作のあと、非エンジニアのマネージャーがたどり着いた仕組み化続きをみる"
+    },
+    {
+      "title": "AIに暴言を吐いたら、本当に出力が劣化した話 — Claude Codeに罵声を浴びせた1週間の記録",
+      "url": "https://note.com/natty_yarrow1907/n/nd94b9b803150",
+      "pubDate": "Tue, 21 Apr 2026 14:49:48 +0900",
+      "thumbnail": null,
+      "description": "続きをみる"
+    },
+    {
+      "title": "Claude CodeのAutoModeに全部任せたら、バグだらけで全部やり直した話",
+      "url": "https://note.com/natty_yarrow1907/n/n7b7a60e12739",
+      "pubDate": "Mon, 20 Apr 2026 12:43:54 +0900",
+      "thumbnail": null,
+      "description": "続きをみる"
+    },
+    {
+      "title": "AIハネムーン期の終わり—Claude Codeに感動していた1ヶ月、そして冷めた話",
+      "url": "https://note.com/natty_yarrow1907/n/n8c0c0a01f278",
+      "pubDate": "Sun, 19 Apr 2026 11:14:48 +0900",
+      "thumbnail": null,
+      "description": "続きをみる"
+    },
+    {
+      "title": "「外注500万円」に絶句した私がClaudeCodeで1週間・約2万円でアプリをリリースした話",
+      "url": "https://note.com/natty_yarrow1907/n/nd8e6a04e6d1e",
+      "pubDate": "Sat, 18 Apr 2026 10:56:51 +0900",
+      "thumbnail": null,
+      "description": "はじめに続きをみる"
+    }
+  ]
+}
