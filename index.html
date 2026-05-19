@@ -4,13 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Akiharu Hyuga — Apps</title>
-  <meta name="description" content="Akiharu Hyugaのゲームアプリ一覧">
-  <meta property="og:title"       content="Akiharu Hyuga — Apps">
-  <meta property="og:description" content="Akiharu Hyugaのゲームアプリ一覧">
-  <meta property="og:image"       content="https://hyuga.github.io/assets/app_icon.png">
+  <meta name="description" content="Akiharu Hyugaのゲームアプリ。脱出ゲーム「もふふミルクとにゃんこ脱出ゲーム」と育成ゲーム「もふふミルクのにゃんこ図鑑」をFlutterで個人開発。iOS向けゲームアプリ。">
+  <meta property="og:title"       content="Akiharu Hyuga — Game Developer">
+  <meta property="og:description" content="脱出ゲーム＆猫育成ゲームを個人開発。Flutter / Claude Code で作るゲームアプリ。">
+  <meta property="og:image"       content="https://hyuga.github.io/assets/feature_graphic.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="500">
   <meta property="og:url"         content="https://hyuga.github.io/">
   <meta property="og:type"        content="website">
+  <meta property="og:site_name"   content="Akiharu Hyuga">
   <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:creator"    content="@Akiyu0901">
+  <meta name="twitter:title"      content="Akiharu Hyuga — Game Developer">
+  <meta name="twitter:description" content="脱出ゲーム＆猫育成ゲームを個人開発。Flutter / Claude Code で作るゲームアプリ。">
+  <meta name="twitter:image"      content="https://hyuga.github.io/assets/feature_graphic.png">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-509H2LTQF0"></script>
   <script>
@@ -18,6 +25,21 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-509H2LTQF0');
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Akiharu Hyuga",
+    "url": "https://hyuga.github.io",
+    "jobTitle": "Game Developer",
+    "description": "FlutterでiOSゲームアプリを個人開発するゲームクリエイター",
+    "sameAs": [
+      "https://x.com/Akiyu0901",
+      "https://www.tiktok.com/@moyashi_taro85",
+      "https://note.com/natty_yarrow1907"
+    ]
+  }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -144,7 +166,11 @@
     }
     .dev-sub {
       font-size: var(--fs-small); color: var(--text-lt);
-      letter-spacing: .22em; margin-top: 6px; margin-bottom: 36px;
+      letter-spacing: .22em; margin-top: 6px; margin-bottom: 10px;
+    }
+    .dev-bio {
+      font-size: var(--fs-small); color: var(--text-md);
+      text-align: center; margin-bottom: 28px;
     }
 
     /* ── Divider ── */
@@ -252,9 +278,29 @@
     /* ── Footer ── */
     footer {
       position: relative; z-index: 2;
-      text-align: center; padding: 28px 24px;
+      text-align: center; padding: 28px 24px 32px;
       color: var(--text-lt); font-size: var(--fs-small);
     }
+    .social-links {
+      display: flex; justify-content: center; align-items: center;
+      gap: 20px; margin-bottom: 14px;
+    }
+    .social-links a {
+      display: flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.7);
+      border: 1.5px solid var(--card-bd);
+      color: var(--plum);
+      text-decoration: none;
+      transition: background .2s, border-color .2s, transform .2s;
+    }
+    .social-links a:hover {
+      background: var(--rose); color: #fff;
+      border-color: var(--rose);
+      transform: translateY(-2px);
+    }
+    .social-links svg { width: 18px; height: 18px; fill: currentColor; }
 
     /* ── Note articles ── */
     .note-section {
@@ -349,16 +395,20 @@
 
   <h1 class="dev-name">Akiharu Hyuga</h1>
   <p class="dev-sub">✦ Game Developer ✦</p>
+  <p class="dev-bio">
+    <span class="ja">Flutter × Claude Code で猫ゲームを個人開発中 🐾</span>
+    <span class="en">Indie dev crafting cat games with Flutter & Claude Code 🐾</span>
+  </p>
 
   <div class="divider"><span>APPS</span></div>
 
   <div class="apps">
     <a href="nyanko/" class="app-card">
       <div class="card-banner">
-        <img src="assets/feature_graphic.png" alt="もふふミルクとにゃんこ脱出ゲーム">
+        <img src="assets/feature_graphic.png" alt="もふふミルクとにゃんこ脱出ゲーム" loading="lazy">
       </div>
       <div class="card-body">
-        <img src="assets/app_icon.png" alt="アイコン" class="app-icon">
+        <img src="assets/app_icon.png" alt="アイコン" class="app-icon" loading="lazy">
         <p class="card-desc">
           <span class="ja">ふわふわ島の謎を解いて、ミルクと一緒に脱出しよう</span>
           <span class="en">Solve the mysteries of Fluffy Island and escape with Milk!</span>
@@ -374,10 +424,11 @@
       <div class="card-banner">
         <img src="zukan/assets/feature_graphic.png" alt="もふふミルクのにゃんこ図鑑"
              data-src-ja="zukan/assets/feature_graphic.png"
-             data-src-en="zukan/assets/feature_graphic_en.png">
+             data-src-en="zukan/assets/feature_graphic_en.png"
+             loading="lazy">
       </div>
       <div class="card-body">
-        <img src="zukan/assets/app_icon.png" alt="アイコン" class="app-icon">
+        <img src="zukan/assets/app_icon.png" alt="アイコン" class="app-icon" loading="lazy">
         <p class="card-desc">
           <span class="ja">ふわふわ島の猫たちをお世話して、にゃんこ図鑑を完成させよう</span>
           <span class="en">Care for cats on Fluffy Island and complete your Cat Album!</span>
@@ -403,7 +454,23 @@
   </div>
 </section>
 
-<footer>© 2026 Akiharu Hyuga</footer>
+<footer>
+  <div class="social-links">
+    <!-- X (Twitter) -->
+    <a href="https://x.com/Akiyu0901" target="_blank" rel="noopener" aria-label="X (Twitter)">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </a>
+    <!-- TikTok -->
+    <a href="https://www.tiktok.com/@moyashi_taro85" target="_blank" rel="noopener" aria-label="TikTok">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06Z"/></svg>
+    </a>
+    <!-- Note -->
+    <a href="https://note.com/natty_yarrow1907" target="_blank" rel="noopener" aria-label="Note">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm0 2v12h16V6H4Zm2 3h12v2H6V9Zm0 4h8v2H6v-2Z"/></svg>
+    </a>
+  </div>
+  <p>© 2026 Akiharu Hyuga</p>
+</footer>
 
 <script>
   const sp = document.getElementById('sp');
