@@ -255,6 +255,73 @@
       text-align: center; padding: 28px 24px;
       color: var(--text-lt); font-size: var(--fs-small);
     }
+
+    /* ── Note articles ── */
+    .note-section {
+      position: relative; z-index: 2;
+      width: 100%; max-width: 640px;
+      margin: 0 auto;
+      padding: 0 24px 56px;
+    }
+    .note-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    @media (min-width: 640px) {
+      .note-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .note-card {
+      display: block; text-decoration: none; color: inherit;
+      background: var(--card-bg);
+      border: 1.5px solid var(--card-bd);
+      border-radius: 18px;
+      overflow: hidden;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 4px 18px rgba(200,140,180,.10);
+      transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s, border-color .3s;
+    }
+    .note-card:hover {
+      transform: translateY(-5px) scale(1.01);
+      border-color: rgba(240,160,184,.55);
+      box-shadow: 0 12px 36px rgba(200,140,180,.20);
+    }
+    .note-thumb {
+      width: 100%; aspect-ratio: 16/9;
+      object-fit: cover; display: block;
+    }
+    .note-thumb-ph {
+      width: 100%; aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #fdedf5, #e8d0f0);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; color: var(--text-lt);
+    }
+    .note-body { padding: 10px 12px 12px; }
+    .note-date {
+      font-size: 0.72rem; color: var(--text-lt);
+      letter-spacing: .08em; margin-bottom: 5px;
+    }
+    .note-title {
+      font-size: 0.8rem; font-weight: 700;
+      color: var(--text-dk); line-height: 1.55;
+      display: -webkit-box;
+      -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .note-more {
+      display: flex; justify-content: center; margin-top: 22px;
+    }
+    .note-more a {
+      font-family: 'Klee One', cursive;
+      font-size: var(--fs-small); color: var(--plum);
+      text-decoration: none;
+      border: 1.5px solid var(--rose); border-radius: 30px;
+      padding: 9px 26px; letter-spacing: .1em;
+      transition: background .2s, color .2s, box-shadow .2s;
+    }
+    .note-more a:hover {
+      background: var(--rose); color: #fff;
+      box-shadow: 0 6px 20px rgba(240,160,184,.4);
+    }
   </style>
 </head>
 <body>
@@ -323,6 +390,18 @@
   </div>
 </div>
 
+<!-- Note articles -->
+<section class="note-section" id="note-section" style="display:none">
+  <div class="divider"><span>NOTE</span></div>
+  <div class="note-grid" id="note-grid"></div>
+  <div class="note-more">
+    <a href="https://note.com/natty_yarrow1907" target="_blank" rel="noopener">
+      <span class="ja">✦ Note でもっと読む ✦</span>
+      <span class="en">✦ Read more on Note ✦</span>
+    </a>
+  </div>
+</section>
+
 <footer>© 2026 Akiharu Hyuga</footer>
 
 <script>
@@ -357,6 +436,41 @@
 
   const saved = localStorage.getItem('hyuga-lang');
   if (saved === 'en') setLang('en');
+
+  /* ── Note articles ── */
+  (async () => {
+    const esc = s => { const t = document.createElement('span'); t.textContent = s ?? ''; return t.innerHTML; };
+    const safeUrl = u => { try { const p = new URL(u).protocol; return (p === 'https:' || p === 'http:') ? u : '#'; } catch { return '#'; } };
+    try {
+      const res = await fetch('notes.json');
+      if (!res.ok) return;
+      const { articles } = await res.json();
+      if (!articles?.length) return;
+
+      const grid = document.getElementById('note-grid');
+      grid.innerHTML = articles.map(a => {
+        const d = new Date(a.pubDate);
+        const date = isNaN(d)
+          ? ''
+          : `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
+        const thumb = a.thumbnail
+          ? `<img class="note-thumb" src="${safeUrl(a.thumbnail)}" alt="" loading="lazy"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+          : '';
+        const ph = `<div class="note-thumb-ph" ${a.thumbnail ? 'style="display:none"' : ''}>✦</div>`;
+        return `
+        <a class="note-card" href="${safeUrl(a.url)}" target="_blank" rel="noopener">
+          ${thumb}${ph}
+          <div class="note-body">
+            <div class="note-date">${date}</div>
+            <div class="note-title">${esc(a.title)}</div>
+          </div>
+        </a>`;
+      }).join('');
+
+      document.getElementById('note-section').style.display = '';
+    } catch (e) { console.error('Note fetch failed:', e); }
+  })();
 </script>
 </body>
 </html>

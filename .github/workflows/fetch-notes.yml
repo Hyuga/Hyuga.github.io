@@ -1,0 +1,79 @@
+name: Fetch Note Articles
+on:
+  schedule:
+    - cron: '0 15 * * *'  # Every day at JST 00:00 (UTC 15:00)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch RSS and generate notes.json
+        run: |
+          python3 << 'PYEOF'
+          import xml.etree.ElementTree as ET
+          import json, urllib.request
+          from datetime import datetime, timezone, timedelta
+          from html.parser import HTMLParser
+
+          class MLStripper(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.reset()
+                  self.fed = []
+              def handle_data(self, d): self.fed.append(d)
+              def get_data(self): return ''.join(self.fed)
+
+          def strip_tags(html):
+              s = MLStripper()
+              s.feed(html)
+              return s.get_data()
+
+          url = 'https://note.com/natty_yarrow1907/rss'
+          try:
+              with urllib.request.urlopen(url, timeout=30) as r:
+                  xml_bytes = r.read()
+          except Exception as e:
+              print(f'::error::Failed to fetch RSS: {e}')
+              raise SystemExit(1)
+
+          ns = {'media': 'http://search.yahoo.com/mrss/'}
+          try:
+              root = ET.fromstring(xml_bytes)
+          except ET.ParseError as e:
+              print(f'::error::Failed to parse RSS XML: {e}')
+              raise SystemExit(1)
+          articles = []
+          for item in root.findall('.//item'):
+              thumb_el = item.find('media:thumbnail', ns)
+              desc_raw = item.findtext('description', '')
+              articles.append({
+                  'title':       item.findtext('title', '').strip(),
+                  'url':         item.findtext('link', '').strip(),
+                  'pubDate':     item.findtext('pubDate', '').strip(),
+                  'thumbnail':   thumb_el.get('url') if thumb_el is not None else '',
+                  'description': strip_tags(desc_raw).strip()[:200],
+              })
+
+          jst = timezone(timedelta(hours=9))
+          data = {
+              'updated':  datetime.now(jst).isoformat(),
+              'articles': articles,
+          }
+          with open('notes.json', 'w', encoding='utf-8') as f:
+              json.dump(data, f, ensure_ascii=False, indent=2)
+          print(f'Generated {len(articles)} articles')
+          PYEOF
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add notes.json
+          git diff --cached --quiet || git commit -m "chore: update notes.json"
+          git push
