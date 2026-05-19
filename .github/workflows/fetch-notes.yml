@@ -56,7 +56,7 @@ jobs:
                   'title':       item.findtext('title', '').strip(),
                   'url':         item.findtext('link', '').strip(),
                   'pubDate':     item.findtext('pubDate', '').strip(),
-                  'thumbnail':   thumb_el.get('url') if thumb_el is not None else '',
+                  'thumbnail':   (thumb_el.get('url') or (thumb_el.text or '').strip()) if thumb_el is not None else '',
                   'description': strip_tags(desc_raw).strip()[:200],
               })
 
