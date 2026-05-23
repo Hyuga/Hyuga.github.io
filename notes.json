@@ -1,6 +1,13 @@
 {
-  "updated": "2026-05-23T02:01:55.464838+09:00",
+  "updated": "2026-05-24T00:54:23.142176+09:00",
   "articles": [
+    {
+      "title": "【非エンジニア向け】iOSアプリ、リリース申請までに必ず潰しておく設定チェック10選",
+      "url": "https://note.com/natty_yarrow1907/n/n994113479f9d",
+      "pubDate": "Sat, 23 May 2026 08:47:38 +0900",
+      "thumbnail": "https://assets.st-note.com/production/uploads/images/278646094/rectangle_large_type_2_741a09bc44fef8b2ddecd7b82dc53d2f.png?width=800",
+      "description": "〜もふふミルクのにゃんこ図鑑のリリース直前に、全部潰した記録〜続きをみる"
+    },
     {
       "title": "【非エンジニア向け】個人開発者こそやるべき、Claude Code丸投げで出来るQAテストとは？",
       "url": "https://note.com/natty_yarrow1907/n/n2e9de98bb2f7",
