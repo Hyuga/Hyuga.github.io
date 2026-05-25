@@ -459,6 +459,11 @@
       <span class="en">Privacy Policy</span>
     </a>
     &nbsp;·&nbsp;
+    <a id="tokusho-link" href="tokusho.html">
+      <span class="ja">特定商取引法に基づく表記</span>
+      <span class="en">Specified Commercial Transactions Act</span>
+    </a>
+    &nbsp;·&nbsp;
     <a href="mailto:akiyu0901@gmail.com">
       <span class="ja">お問い合わせ</span>
       <span class="en">Contact</span>
@@ -500,6 +505,8 @@
     document.getElementById('btn-en').classList.toggle('active',  isEn);
     document.getElementById('privacy-link').href =
       isEn ? 'privacy-policy-en.html' : 'privacy-policy.html';
+    document.getElementById('tokusho-link').href =
+      isEn ? 'tokusho-en.html' : 'tokusho.html';
     // swap localizable images
     document.querySelectorAll('img[data-src-ja]').forEach(img => {
       img.src = isEn ? img.dataset.srcEn : img.dataset.srcJa;
