@@ -369,6 +369,22 @@
       background: var(--rose); color: #fff;
       box-shadow: 0 6px 20px rgba(240,160,184,.4);
     }
+
+    /* ── Press / media coverage ── */
+    .press-lead {
+      text-align: center;
+      font-size: 0.82rem; color: var(--text-lt);
+      line-height: 1.7; margin: -2px 0 18px;
+    }
+    .press-thumb {
+      width: 100%; aspect-ratio: 16/9;
+      object-fit: cover; display: block;
+      background: linear-gradient(135deg, #fdedf5, #e8d0f0);
+    }
+    .press-site {
+      font-size: 0.7rem; font-weight: 700; color: var(--rose);
+      letter-spacing: .06em; margin-bottom: 5px;
+    }
   </style>
 </head>
 <body>
@@ -441,6 +457,41 @@
     </a>
   </div>
 </div>
+
+<!-- Press / media coverage -->
+<section class="note-section" id="press-section">
+  <div class="divider">
+    <span class="ja">掲載情報</span>
+    <span class="en">PRESS</span>
+  </div>
+  <p class="press-lead">
+    <span class="ja">アプリのご紹介（各レビューサイト・プレスリリース）</span>
+    <span class="en">Featured on review sites & press releases</span>
+  </p>
+  <div class="note-grid">
+    <a class="note-card" href="https://game-i.daa.jp/?topic/20260601sp1" target="_blank" rel="noopener">
+      <img class="press-thumb" src="assets/press/game-i.jpg" alt="Game-i 掲載記事" loading="lazy">
+      <div class="note-body">
+        <div class="press-site">Game-i</div>
+        <div class="note-title">もふふミルクのにゃんこ図鑑｜猫を育て家系図を紡ぐ育成シミュレーション</div>
+      </div>
+    </a>
+    <a class="note-card" href="https://pr-free.jp/2026/168803/" target="_blank" rel="noopener">
+      <img class="press-thumb" src="assets/press/pr-free.png" alt="PR-FREE プレスリリース" loading="lazy">
+      <div class="note-body">
+        <div class="press-site">PR-FREE</div>
+        <div class="note-title">もやちカンパニー／もふふミルクのにゃんこ図鑑（iOS）リリースしました。</div>
+      </div>
+    </a>
+    <a class="note-card" href="https://www.prerele.com/releases/detail/51924" target="_blank" rel="noopener">
+      <img class="press-thumb" src="assets/press/prerele.jpg" alt="ぷれりり プレスリリース" loading="lazy">
+      <div class="note-body">
+        <div class="press-site">ぷれりり</div>
+        <div class="note-title">『もふふミルクのにゃんこ図鑑』2026年6月1日App Storeリリース</div>
+      </div>
+    </a>
+  </div>
+</section>
 
 <!-- Note articles -->
 <section class="note-section" id="note-section" style="display:none">
