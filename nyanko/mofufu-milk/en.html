@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mofufu Milk | Moyachi Company</title>
+<meta name="description" content="Mofufu Milk, a soft white kitten from Moyachi Company. A little bundle of kindness who melts your heart just by being near." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Zen+Maru+Gothic:wght@400;500;700&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="styles.css" />
+<link rel="icon" type="image/webp" href="assets/logo/company_logo.webp" />
+</head>
+<body class="lang-en">
+
+<!-- ===== Background layers (clouds, sparkles, dreamy gradient) ===== -->
+<div class="dreamscape" aria-hidden="true">
+  <div class="gradient-mesh"></div>
+  <div class="clouds">
+    <span class="cloud cloud--1"></span>
+    <span class="cloud cloud--2"></span>
+    <span class="cloud cloud--3"></span>
+    <span class="cloud cloud--4"></span>
+    <span class="cloud cloud--5"></span>
+  </div>
+  <div class="sparkle-field" id="sparkleField"></div>
+  <div class="grain"></div>
+</div>
+
+<!-- ===== Header ===== -->
+<header class="site-header" data-reveal>
+  <a class="brand" href="#top">
+    <img class="brand__logo" src="assets/logo/company_logo.webp" alt="Moyachi Company" width="120" height="120" />
+    <span class="brand__name">
+      <span class="brand__ja">Moyachi&nbsp;Company</span>
+      <span class="brand__en">もやちカンパニー</span>
+    </span>
+  </a>
+  <nav class="lang-switch" aria-label="Language">
+    <a class="lang-switch__btn" href="index.html" hreflang="ja">JP</a>
+    <span class="lang-switch__sep" aria-hidden="true"></span>
+    <a class="lang-switch__btn is-active" href="en.html" hreflang="en" aria-current="page">EN</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <p class="hero__eyebrow" data-reveal>
+      <span class="hero__eyebrow-ja">Presented by Moyachi Company</span>
+    </p>
+
+    <div class="hero__stage">
+      <div class="halo-layer" data-parallax="0.04" aria-hidden="true">
+        <div class="halo"></div>
+      </div>
+      <div class="orbit" aria-hidden="true">
+        <span class="orbit__star orbit__star--a"></span>
+        <span class="orbit__star orbit__star--b"></span>
+        <span class="orbit__star orbit__star--c"></span>
+      </div>
+      <div class="hero__milk-layer" data-parallax="-0.06">
+        <img class="hero__milk" src="assets/milk/milk_normal_01.webp"
+             alt="Mofufu Milk" width="1298" height="1294" fetchpriority="high" />
+      </div>
+      <div class="hero__cloud-base" aria-hidden="true"></div>
+    </div>
+
+    <div class="hero__copy">
+      <h1 class="hero__title" data-reveal>
+        <span class="hero__title-ja">Mofufu&nbsp;Milk</span>
+        <span class="hero__title-en">もふふミルク</span>
+      </h1>
+      <p class="hero__catch" data-reveal>
+        From a little <span class="okaeri">“welcome home,”</span><br class="catch-br" />a brighter Japan.
+      </p>
+      <p class="hero__lead" data-reveal>
+        Milk, the little white kitten, is here to gently welcome you today.
+      </p>
+    </div>
+
+    <a class="scroll-cue" href="#wish" data-reveal aria-label="Get to know Milk">
+      <span class="scroll-cue__text">Get to know her</span>
+      <span class="scroll-cue__dot"></span>
+    </a>
+  </section>
+
+  <!-- ===== Our Wish ===== -->
+  <section class="wish" id="wish">
+    <div class="wish__inner">
+      <p class="kicker kicker--center"><span class="kicker__line"></span>Our Wish<span class="kicker__line"></span></p>
+      <div class="wish__milk" data-reveal data-float="7">
+        <img src="assets/milk/milk_pleading.webp" alt="Milk making a wish" width="500" height="500" loading="lazy" />
+      </div>
+      <h2 class="wish__heading" data-reveal>Milk's Little Wish</h2>
+      <div class="wish__copy">
+        <p data-reveal>On the days you gave it your all — and the days you couldn't. Milk, the little white kitten, greets you softly with a <span class="hl">“welcome home.”</span></p>
+        <p data-reveal>When you feel a little brighter, you bring more smiles to your town. <br class="pc-br" />Those smiles warm up the places we work. <br class="pc-br" />As each person's kindness adds up, Japan grows brighter, together.</p>
+        <p data-reveal>What Milk wants to deliver is a soft, fluffy <span class="hl">“welcome home.”</span> <br class="pc-br" />From a little comfort, a great big cheer.</p>
+        <p class="wish__closing" data-reveal>That's the wish Milk was born from.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Meet Milk ===== -->
+  <section class="about" id="about">
+    <div class="about__inner">
+
+      <div class="about__intro" data-reveal>
+        <p class="kicker"><span class="kicker__line"></span>Who is Milk?</p>
+        <h2 class="about__heading">Meet Milk.</h2>
+        <p class="about__text">
+          Mofufu Milk is a soft, snow-white kitten from Moyachi Company.
+          With rosy cheeks and big, slightly sleepy round eyes,
+          just having her close makes your heart melt a little.
+          She's a little bundle of kindness.
+        </p>
+      </div>
+
+      <!-- Three little charms -->
+      <ul class="traits">
+        <li class="trait" data-reveal>
+          <span class="trait__icon trait__icon--heart" aria-hidden="true"></span>
+          <h3 class="trait__title">Gentle &amp; Healing</h3>
+          <p class="trait__desc">Just being near her feels calming. She's a cuddly soul who loves to stay close.</p>
+        </li>
+        <li class="trait" data-reveal>
+          <span class="trait__icon trait__icon--sun" aria-hidden="true"></span>
+          <h3 class="trait__title">Loves Fish &amp; Sunsets</h3>
+          <p class="trait__desc">Her favorite time is when the sky glows at sunset. Her treat of choice? A tasty little fish.</p>
+        </li>
+        <li class="trait" data-reveal>
+          <span class="trait__icon trait__icon--paw" aria-hidden="true"></span>
+          <h3 class="trait__title">Always by Your Side</h3>
+          <p class="trait__desc">On good days and tough days alike, she's always waiting with a “welcome home.”</p>
+        </li>
+      </ul>
+
+      <!-- A peek at her many moods -->
+      <div class="moods" data-reveal aria-label="Milk's moods">
+        <figure class="mood"><img src="assets/milk/milk_happy.webp" alt="Happy Milk" loading="lazy" /><figcaption>Happy</figcaption></figure>
+        <figure class="mood"><img src="assets/milk/milk_pleading.webp" alt="Pleading Milk" loading="lazy" /><figcaption>Pretty please</figcaption></figure>
+        <figure class="mood"><img src="assets/milk/milk_normal_02.webp" alt="Sleepy Milk" loading="lazy" /><figcaption>Sleepy</figcaption></figure>
+        <figure class="mood"><img src="assets/milk/milk_dress.webp" alt="Dressed-up Milk" loading="lazy" /><figcaption>Dressed up</figcaption></figure>
+      </div>
+
+      <p class="about__outro" data-reveal>
+        Let's make every day a little softer — together.
+      </p>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== Footer ===== -->
+<footer class="site-footer" data-reveal>
+  <img class="site-footer__logo" src="assets/logo/company_logo.webp" alt="Moyachi Company" width="96" height="96" />
+  <p class="site-footer__name">Moyachi&nbsp;Company</p>
+  <p class="site-footer__copy">© Moyachi Company — Mofufu Milk</p>
+</footer>
+
+<script src="app.js" defer></script>
+</body>
+</html>

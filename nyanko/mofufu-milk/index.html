@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>もふふミルク｜もやちカンパニー</title>
+<meta name="description" content="もやちカンパニーがおくる、ふわふわの白猫「もふふミルク」。そばにいるだけで心がほどける、やさしさのかたまり。" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Zen+Maru+Gothic:wght@400;500;700&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="styles.css" />
+<link rel="icon" type="image/webp" href="assets/logo/company_logo.webp" />
+</head>
+<body>
+
+<!-- ===== 背景レイヤー（雲・きらきら・ゆめのグラデ） ===== -->
+<div class="dreamscape" aria-hidden="true">
+  <div class="gradient-mesh"></div>
+  <div class="clouds">
+    <span class="cloud cloud--1"></span>
+    <span class="cloud cloud--2"></span>
+    <span class="cloud cloud--3"></span>
+    <span class="cloud cloud--4"></span>
+    <span class="cloud cloud--5"></span>
+  </div>
+  <div class="sparkle-field" id="sparkleField"></div>
+  <div class="grain"></div>
+</div>
+
+<!-- ===== ヘッダー ===== -->
+<header class="site-header" data-reveal>
+  <a class="brand" href="#top">
+    <img class="brand__logo" src="assets/logo/company_logo.webp" alt="もやちカンパニー" width="120" height="120" />
+    <span class="brand__name">
+      <span class="brand__ja">もやちカンパニー</span>
+      <span class="brand__en">Moyachi&nbsp;Company</span>
+    </span>
+  </a>
+  <nav class="lang-switch" aria-label="言語切り替え">
+    <a class="lang-switch__btn is-active" href="index.html" hreflang="ja" aria-current="page">JP</a>
+    <span class="lang-switch__sep" aria-hidden="true"></span>
+    <a class="lang-switch__btn" href="en.html" hreflang="en">EN</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- ===== ヒーロー ===== -->
+  <section class="hero">
+    <p class="hero__eyebrow" data-reveal>
+      <span class="hero__eyebrow-ja">もやちカンパニー が おくる</span>
+    </p>
+
+    <div class="hero__stage">
+      <!-- ミルクの後光（パララックスはラッパー、脈動はhalo自身） -->
+      <div class="halo-layer" data-parallax="0.04" aria-hidden="true">
+        <div class="halo"></div>
+      </div>
+      <div class="orbit" aria-hidden="true">
+        <span class="orbit__star orbit__star--a"></span>
+        <span class="orbit__star orbit__star--b"></span>
+        <span class="orbit__star orbit__star--c"></span>
+      </div>
+      <!-- メインビジュアル（パララックスはラッパー、呼吸はimg自身） -->
+      <div class="hero__milk-layer" data-parallax="-0.06">
+        <img class="hero__milk" src="assets/milk/milk_normal_01.webp"
+             alt="もふふミルク" width="1298" height="1294" fetchpriority="high" />
+      </div>
+      <!-- 足もとの雲ベンチ -->
+      <div class="hero__cloud-base" aria-hidden="true"></div>
+    </div>
+
+    <div class="hero__copy">
+      <h1 class="hero__title" data-reveal>
+        <span class="hero__title-ja">もふふミルク</span>
+        <span class="hero__title-en">Mofufu&nbsp;Milk</span>
+      </h1>
+      <p class="hero__catch" data-reveal>
+        ちいさな<span class="okaeri">「おかえり」</span>から、<br class="catch-br" />日本を元気に。
+      </p>
+      <p class="hero__lead" data-reveal>
+        しろいにゃんこ「ミルク」が、今日もそっとあなたを迎えるにゃ。
+      </p>
+    </div>
+
+    <a class="scroll-cue" href="#wish" data-reveal aria-label="ミルクのことを知る">
+      <span class="scroll-cue__text">もっと、しりたい</span>
+      <span class="scroll-cue__dot"></span>
+    </a>
+  </section>
+
+  <!-- ===== ねがいごと（想い） ===== -->
+  <section class="wish" id="wish">
+    <div class="wish__inner">
+      <p class="kicker kicker--center"><span class="kicker__line"></span>Our Wish<span class="kicker__line"></span></p>
+      <div class="wish__milk" data-reveal data-float="7">
+        <img src="assets/milk/milk_pleading.webp" alt="おいのりするミルク" width="500" height="500" loading="lazy" />
+      </div>
+      <h2 class="wish__heading" data-reveal>ミルクの、ねがいごと。</h2>
+      <div class="wish__copy">
+        <p data-reveal>がんばった日も、そうじゃなかった日も。<br class="pc-br" />しろいにゃんこ「ミルク」は、<span class="hl">「おかえり」</span>と、あなたをそっと迎えます。</p>
+        <p data-reveal>元気をもらったあなたが、まちに笑顔を増やす。<br class="pc-br" />その笑顔が、はたらく場所をあたためる。<br class="pc-br" />ひとりひとりのやさしさが集まって、日本は、もっと元気になれる。</p>
+        <p data-reveal>ミルクが届けたいのは、ふわふわの<span class="hl">「おかえり」</span>。<br class="pc-br" />ちいさな癒しから、大きな元気を。</p>
+        <p class="wish__closing" data-reveal>そんな想いで、ミルクは生まれました。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 紹介の一節：ミルクってこんな子 ===== -->
+  <section class="about" id="about">
+    <div class="about__inner">
+
+      <div class="about__intro" data-reveal>
+        <p class="kicker"><span class="kicker__line"></span>Who is Milk?</p>
+        <h2 class="about__heading">ミルクって、こんな子。</h2>
+        <p class="about__text">
+          もふふミルクは、もやちカンパニーがおくる、
+          まっしろでやわらかな白猫の女の子。
+          ピンク色のほっぺと、すこし眠たげなまんまるの瞳。
+          となりにいるだけで、心がふわっとほどけていく——
+          そんな、やさしさのかたまりにゃ。
+        </p>
+      </div>
+
+      <!-- 3つの魅力 -->
+      <ul class="traits">
+        <li class="trait" data-reveal>
+          <span class="trait__icon trait__icon--heart" aria-hidden="true"></span>
+          <h3 class="trait__title">やさしい癒し系</h3>
+          <p class="trait__en">Gentle &amp; Healing</p>
+          <p class="trait__desc">そばにいるだけで、ほっとするにゃ。甘えん坊で、寄り添うのが大すき。</p>
+        </li>
+        <li class="trait" data-reveal>
+          <span class="trait__icon trait__icon--sun" aria-hidden="true"></span>
+          <h3 class="trait__title">お魚と夕暮れがすき</h3>
+          <p class="trait__en">Loves Fish &amp; Sunsets</p>
+          <p class="trait__desc">夕焼けにそまる時間が、いちばんのお気に入り。ごほうびはおいしいお魚にゃ。</p>
+        </li>
+        <li class="trait" data-reveal>
+          <span class="trait__icon trait__icon--paw" aria-hidden="true"></span>
+          <h3 class="trait__title">いつも、そばに</h3>
+          <p class="trait__en">Always by Your Side</p>
+          <p class="trait__desc">がんばった日も、そうじゃない日も。今日も「おかえり」って、あなたを待ってるにゃ。</p>
+        </li>
+      </ul>
+
+      <!-- 表情差分のチラ見せ -->
+      <div class="moods" data-reveal aria-label="ミルクの表情差分">
+        <figure class="mood"><img src="assets/milk/milk_happy.webp" alt="うれしいミルク" loading="lazy" /><figcaption>うれしい</figcaption></figure>
+        <figure class="mood"><img src="assets/milk/milk_pleading.webp" alt="おねだりミルク" loading="lazy" /><figcaption>おねだり</figcaption></figure>
+        <figure class="mood"><img src="assets/milk/milk_normal_02.webp" alt="おねむミルク" loading="lazy" /><figcaption>おねむ</figcaption></figure>
+        <figure class="mood"><img src="assets/milk/milk_dress.webp" alt="おめかしミルク" loading="lazy" /><figcaption>おめかし</figcaption></figure>
+      </div>
+
+      <p class="about__outro" data-reveal>
+        さあ、ふわふわの毎日を、ミルクといっしょに。<br />
+        <span class="about__outro-en">Let's make every day a little softer, together.</span>
+      </p>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== フッター ===== -->
+<footer class="site-footer" data-reveal>
+  <img class="site-footer__logo" src="assets/logo/company_logo.webp" alt="もやちカンパニー" width="96" height="96" />
+  <p class="site-footer__name">もやちカンパニー / Moyachi&nbsp;Company</p>
+  <p class="site-footer__copy">© Moyachi Company — もふふミルク</p>
+</footer>
+
+<script src="app.js" defer></script>
+</body>
+</html>
