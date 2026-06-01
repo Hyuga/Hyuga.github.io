@@ -708,14 +708,6 @@ img { display: block; max-width: 100%; height: auto; }
   0%, 100% { box-shadow: 0 14px 28px -8px rgba(255,122,162,.7); }
   50%      { box-shadow: 0 14px 36px -4px rgba(255,122,162,.95); }
 }
-.cta__note {
-  position: relative;
-  margin-top: 18px;
-  font-family: var(--font-body);
-  font-size: .82rem;
-  color: var(--ink-faint);
-}
-
 /* =========================================================
    フッター
    ========================================================= */
