@@ -168,9 +168,46 @@
       font-size: var(--fs-small); color: var(--text-lt);
       letter-spacing: .22em; margin-top: 6px; margin-bottom: 10px;
     }
-    .dev-bio {
-      font-size: var(--fs-small); color: var(--text-md);
-      text-align: center; margin-bottom: 28px;
+    /* ── Character intro link ── */
+    .chara-link {
+      display: flex; align-items: center; gap: 14px;
+      width: 100%;
+      text-decoration: none; color: inherit;
+      background: var(--card-bg);
+      border: 1.5px solid var(--card-bd);
+      border-radius: 20px;
+      padding: 14px 18px;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 4px 18px rgba(200,140,180,.10);
+      margin-bottom: 28px;
+      transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s, border-color .3s;
+    }
+    .chara-link:hover {
+      transform: translateY(-4px) scale(1.01);
+      border-color: rgba(240,160,184,.55);
+      box-shadow: 0 12px 32px rgba(200,140,180,.20);
+    }
+    .chara-link-img {
+      width: 64px; height: 64px; object-fit: contain; flex-shrink: 0;
+      filter: drop-shadow(0 4px 10px rgba(200,100,140,.2));
+    }
+    .chara-link-body { flex: 1; min-width: 0; }
+    .chara-link-label {
+      font-family: 'Mochiy Pop One', cursive;
+      font-size: 0.82rem; color: var(--rose);
+      letter-spacing: .1em; margin-bottom: 4px;
+    }
+    .chara-link-title {
+      font-family: 'Mochiy Pop One', cursive;
+      font-size: clamp(1rem, 3vw, 1.15rem); color: var(--plum);
+      line-height: 1.4;
+    }
+    .chara-link-desc {
+      font-size: 0.78rem; color: var(--text-md);
+      margin-top: 4px; line-height: 1.6;
+    }
+    .chara-link-arrow {
+      font-size: 1.1rem; color: var(--rose); flex-shrink: 0;
     }
 
     /* ── Divider ── */
@@ -411,6 +448,19 @@
 
   <h1 class="dev-name">もふふミルクシリーズ</h1>
   <p class="dev-sub">✦ iOS Apps ✦</p>
+
+  <a href="nyanko/mofufu-milk" class="chara-link">
+    <img src="assets/milk_hero.webp" alt="もふふミルク" class="chara-link-img">
+    <div class="chara-link-body">
+      <div class="chara-link-label">CHARACTER</div>
+      <div class="chara-link-title">もふふミルク</div>
+      <div class="chara-link-desc">
+        <span class="ja">ふわふわ島に住む、しろねこの女の子🐾</span>
+        <span class="en">A white cat girl living on Fluffy Island 🐾</span>
+      </div>
+    </div>
+    <span class="chara-link-arrow">›</span>
+  </a>
 
   <div class="divider"><span>APPS</span></div>
 
