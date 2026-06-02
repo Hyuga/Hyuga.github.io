@@ -1,6 +1,13 @@
 {
-  "updated": "2026-06-02T04:51:38.486376+09:00",
+  "updated": "2026-06-03T03:30:48.876029+09:00",
   "articles": [
+    {
+      "title": "設計ドキュメントをmdからHTMLに変えた劇的効果とは？",
+      "url": "https://note.com/natty_yarrow1907/n/nbd1d095cf2c7",
+      "pubDate": "Tue, 02 Jun 2026 21:04:46 +0900",
+      "thumbnail": "https://assets.st-note.com/production/uploads/images/281862061/rectangle_large_type_2_ced3fca8ffeb4c534ee4f21426a869d3.png?width=800",
+      "description": "その前に、お知らせを一つだけ。「もふふミルクのにゃんこ図鑑」、2026年6月1日(月)にリリースしました🌸続きをみる"
+    },
     {
       "title": "「動く」と「育てられる」は別だった。AI製アプリを書き直して気付いたこと",
       "url": "https://note.com/natty_yarrow1907/n/nef930986c6f6",
