@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>もふふミルクのゴルフログ</title>
+  <meta name="description" content="ミルクと一緒に、ゴルフはじめよ。スコアを記録するほど相棒のミルクが育つ、ゴルフ女子のためのかわいいゴルフスコア記録アプリ。">
+  <meta property="og:title"       content="もふふミルクのゴルフログ">
+  <meta property="og:description" content="ミルクと一緒に、ゴルフはじめよ。記録するほど相棒がぐんぐん育つ、かわいいゴルフスコア記録アプリ。">
+  <meta property="og:image"       content="https://hyuga.github.io/golf-log/assets/app_icon.png">
+  <meta property="og:url"         content="https://hyuga.github.io/golf-log/">
+  <meta property="og:type"        content="website">
+  <meta name="twitter:card"       content="summary_large_image">
+  <link rel="icon" href="assets/app_icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream:      #fdf7f3;
+      --rose:       #f0a0b8;
+      --rose-dark:  #d4607a;
+      --plum:       #6a4070;
+      --gold:       #f5c860;
+      --sky:        #bfe6ff;
+      --grass:      #aedd96;
+      --grass-dk:   #5fa64a;
+      --text-dk:    #3a2040;
+      --text-md:    #8a6090;
+      --text-lt:    #b89ac4;
+      --card-bg:    rgba(255,255,255,.86);
+      --card-bd:    rgba(240,160,184,.32);
+      --fs-hero:    clamp(1.7rem, 5vw, 2.7rem);
+      --fs-h2:      clamp(1.2rem, 3vw, 1.6rem);
+      --fs-body:    clamp(0.95rem, 2vw, 1.1rem);
+      --fs-small:   clamp(0.85rem, 1.8vw, 1rem);
+      --fs-btn:     clamp(1rem, 2.2vw, 1.15rem);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      background: var(--cream);
+      color: var(--text-dk);
+      overflow-x: hidden;
+      font-size: var(--fs-body);
+    }
+
+    /* ── Background: 空 → 桜 → 芝（ゴルフ場） ── */
+    .bg {
+      position: fixed; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 90% 45% at 50% 0%,   #d6efffEE 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 88% 12%,  #ffe2f0cc 0%, transparent 55%),
+        radial-gradient(ellipse 60% 40% at 12% 14%,  #ead8ffaa 0%, transparent 55%),
+        radial-gradient(ellipse 120% 55% at 50% 100%, #c7ecae 0%, #e8f6ddaa 45%, transparent 72%),
+        var(--cream);
+    }
+    /* 芝のふんわりライン */
+    .bg::after {
+      content:''; position:absolute; left:0; right:0; bottom:0; height:34vh;
+      background: linear-gradient(180deg, transparent 0%, rgba(150,210,120,.16) 60%, rgba(120,190,90,.24) 100%);
+      pointer-events:none;
+    }
+
+    /* ── Sparkles ── */
+    .sparkles { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+    .sp {
+      position: absolute; color: var(--cl, #f5c860);
+      font-size: var(--sz, 12px);
+      animation: sp-rise var(--dur, 7s) ease-in-out infinite var(--del, 0s);
+      opacity: 0;
+    }
+    @keyframes sp-rise {
+      0%   { opacity: 0;   transform: translateY(0) scale(.7); }
+      30%  { opacity: .8; }
+      70%  { opacity: .3; }
+      100% { opacity: 0;   transform: translateY(-70px) scale(1.3); }
+    }
+
+    /* ── Back link ── */
+    .back {
+      position: fixed; top: 18px; left: 18px; z-index: 20;
+      font-family: 'Mochiy Pop One', cursive;
+      font-size: var(--fs-small);
+      color: var(--text-md); text-decoration: none;
+      display: flex; align-items: center; gap: 4px;
+      background: rgba(255,255,255,.85); backdrop-filter: blur(12px);
+      padding: 8px 18px; border-radius: 24px;
+      border: 1.5px solid var(--card-bd);
+      transition: all .2s;
+    }
+    .back:hover { color: var(--plum); border-color: var(--rose); }
+
+    /* ── Page wrapper ── */
+    .page { position: relative; z-index: 2; }
+
+    /* ════════════════════════ HERO — Mobile ════════════════════════ */
+    .hero {
+      padding: 76px 20px 28px;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 22px;
+      text-align: center;
+    }
+    .hero-art {
+      position: relative;
+      width: min(220px, 62vw);
+      flex-shrink: 0;
+    }
+    .hero-icon {
+      width: 100%; aspect-ratio: 1;
+      border-radius: 30px;
+      box-shadow: 0 14px 40px rgba(120,170,90,.28), 0 4px 14px rgba(200,100,140,.2);
+      display: block;
+    }
+    .hero-milk {
+      position: absolute;
+      width: 46%;
+      right: -14%; bottom: -10%;
+      filter: drop-shadow(0 8px 16px rgba(90,120,60,.28));
+      animation: bob 4s ease-in-out infinite;
+    }
+    .hero-name {
+      font-family: 'Mochiy Pop One', cursive;
+      font-size: var(--fs-hero);
+      color: var(--rose-dark);
+      line-height: 1.35;
+      letter-spacing: .01em;
+    }
+    .hero-tagline {
+      font-size: var(--fs-body);
+      color: var(--text-md);
+      line-height: 1.8;
+      max-width: 540px;
+    }
+    h1, h2, h3       { text-wrap: balance; word-break: auto-phrase; }
+    p, .hero-tagline { text-wrap: pretty;  word-break: auto-phrase; }
+
+    .cta-group {
+      display: flex; flex-direction: column;
+      gap: 12px; width: 100%; max-width: 360px;
+      align-items: center;
+    }
+    .cta-btn {
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; padding: 16px 28px; width: 100%;
+      border-radius: 16px; text-decoration: none;
+      font-family: 'Mochiy Pop One', cursive;
+      font-size: var(--fs-btn);
+      white-space: nowrap;
+      transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s;
+    }
+    .cta-btn svg { width: 24px; height: 24px; flex-shrink: 0; }
+    .cta-ios {
+      background: var(--rose); color: #fff;
+      box-shadow: 0 6px 20px rgba(240,160,184,.5);
+    }
+    @media (hover: hover) { .cta-ios:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 28px rgba(240,160,184,.6); } }
+    .cta-ios svg { fill: #fff; }
+    /* 公開前：近日公開バッジ（公開後は下の cta-ios リンクに差し替え） */
+    .cta-soon {
+      background: var(--card-bg); color: var(--plum);
+      border: 2px solid var(--card-bd); cursor: default;
+      box-shadow: 0 4px 16px rgba(200,140,180,.12);
+    }
+    .cta-soon svg { fill: var(--plum); }
+    .cta-note { font-size: var(--fs-small); color: var(--text-lt); }
+
+    /* ════════════════════════ HERO — PC (≥768px) ════════════════════════ */
+    @media (min-width: 768px) {
+      .page { max-width: 920px; margin: 0 auto; padding: 0 36px; }
+      .hero {
+        padding: 96px 0 44px;
+        flex-direction: row;
+        text-align: left;
+        align-items: center;
+        gap: 48px;
+      }
+      .hero-art { width: min(300px, 36vw); }
+      .hero-body { flex: 1; display: flex; flex-direction: column; gap: 20px; align-items: flex-start; }
+      .cta-group { align-items: flex-start; }
+      .cta-btn { width: auto; }
+    }
+
+    /* ════════════════════════ MILK STRIP ════════════════════════ */
+    .milk-strip {
+      position: relative; z-index: 2;
+      background: rgba(255,255,255,.55);
+      border: 1px solid rgba(160,210,130,.3);
+      border-radius: 18px;
+      margin: 0 16px;
+      padding: 16px 8px 12px;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 4px;
+      backdrop-filter: blur(8px);
+    }
+    .milk-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .milk-item img {
+      width: min(58px, 92%); height: auto; aspect-ratio: 1; object-fit: contain;
+      animation: bob var(--d, 4s) ease-in-out infinite var(--dl, 0s);
+      filter: drop-shadow(0 6px 12px rgba(120,160,90,.22));
+    }
+    @keyframes bob {
+      0%,100% { transform: translateY(0) rotate(-2deg); }
+      50%      { transform: translateY(-10px) rotate(2deg); }
+    }
+    .milk-item .serif {
+      font-family: 'Mochiy Pop One', cursive;
+      font-size: .68rem; color: var(--text-md);
+      text-align: center; line-height: 1.4;
+    }
+    @media (min-width: 768px) {
+      .milk-strip {
+        display: flex; justify-content: center;
+        gap: 28px; padding: 28px 36px 20px;
+        margin: 0; border-radius: 0; border: none;
+        border-top: 1px solid rgba(160,210,130,.3);
+        border-bottom: 1px solid rgba(160,210,130,.3);
+        background: rgba(255,255,255,.4);
+      }
+      .milk-item { width: 112px; }
+      .milk-item img { width: 96px; height: 96px; }
+      .milk-item .serif { font-size: .9rem; }
+    }
+
+    /* ════════════════════════ SCREENSHOTS ════════════════════════ */
+    .screenshots { position: relative; z-index: 2; padding: 44px 0 36px; margin: 0 16px; text-align: center; }
+    .section-title {
+      font-family: 'Mochiy Pop One', cursive;
+      font-size: var(--fs-h2); color: var(--plum);
+      margin-bottom: 22px;
+    }
+    .section-title::before, .section-title::after { content: ' ✦ '; color: var(--rose); }
+
+    .shots-track {
+      display: flex; gap: 16px;
+      overflow-x: auto; scroll-snap-type: x mandatory;
+      scrollbar-width: none; padding: 12px 0 24px;
+      justify-content: flex-start;
+    }
+    .shots-track::-webkit-scrollbar { display: none; }
+    .shots-track::before, .shots-track::after { content: ''; flex-shrink: 0; width: 8px; }
+    .shot {
+      flex-shrink: 0; width: 176px;
+      scroll-snap-align: center;
+      border-radius: 22px; overflow: hidden;
+      box-shadow: 0 10px 30px rgba(120,160,90,.2), 0 4px 14px rgba(200,100,140,.16);
+      transition: transform .3s cubic-bezier(.34,1.56,.64,1);
+      background: #fff;
+    }
+    .shot:hover { transform: scale(1.04) translateY(-6px); box-shadow: 0 18px 44px rgba(120,160,90,.3); }
+    .shot img { width: 100%; display: block; }
+    @media (min-width: 768px) {
+      .screenshots { padding: 52px 0 40px; max-width: 1100px; margin: 0 auto; }
+      .shots-track { justify-content: center; padding: 16px 0 24px; gap: 22px; }
+      .shots-track::before, .shots-track::after { width: 0; }
+      .shot { width: 212px; }
+    }
+
+    /* ════════════════════════ FEATURES ════════════════════════ */
+    .features { padding: 36px 20px 0; }
+    .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .feat-card {
+      min-width: 0;
+      background: var(--card-bg);
+      border: 1.5px solid var(--card-bd);
+      border-radius: 20px; padding: 22px 16px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 4px 16px rgba(160,180,150,.1);
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; gap: 10px;
+      transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s;
+    }
+    .feat-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(160,180,150,.2); }
+    .feat-milk {
+      width: 78px; height: 78px; object-fit: contain;
+      filter: drop-shadow(0 4px 10px rgba(120,160,90,.22));
+    }
+    .feat-card h3 {
+      font-family: 'Mochiy Pop One', cursive;
+      font-size: clamp(0.85rem, 1.9vw, 1rem); color: var(--plum);
+    }
+    .feat-card p { font-size: var(--fs-small); color: var(--text-lt); line-height: 1.65; }
+    @media (min-width: 768px) {
+      .features { padding: 48px 0 0; }
+      .features-grid { grid-template-columns: repeat(4,1fr); gap: 16px; }
+      .feat-card { padding: 26px 14px; }
+      .feat-milk { width: 92px; height: 92px; }
+    }
+
+    /* ════════════════════════ FOOTER ════════════════════════ */
+    footer {
+      position: relative; z-index: 2;
+      text-align: center; padding: 44px 20px;
+      border-top: 1px solid rgba(160,210,130,.3);
+      color: var(--text-lt); font-size: var(--fs-small);
+      margin-top: 48px;
+      max-width: 920px; margin-left: auto; margin-right: auto; width: 100%;
+    }
+    footer a { color: var(--rose); text-decoration: none; white-space: nowrap; }
+    footer a:hover { text-decoration: underline; }
+    footer p + p { margin-top: 8px; }
+  </style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="sparkles" id="sp"></div>
+<a href="../" class="back">‹ Apps</a>
+
+<div class="page">
+  <section class="hero">
+    <div class="hero-art">
+      <img src="assets/app_icon.png" alt="もふふミルクのゴルフログ アイコン" class="hero-icon">
+      <img src="assets/milk_character.png" alt="ゴルフをするミルク" class="hero-milk">
+    </div>
+    <div class="hero-body">
+      <h1 class="hero-name">もふふミルクの<br>ゴルフログ</h1>
+      <p class="hero-tagline">ミルクと一緒に、ゴルフはじめよ。<br>スコアを記録するほど相棒のミルクがぐんぐん育つ、ゴルフ女子のためのかわいいスコア記録アプリ。</p>
+      <div class="cta-group">
+        <!-- 公開後：href を App Store の URL に変え、class を "cta-btn cta-ios"、テキストを「App Store でダウンロード」に差し替え -->
+        <span class="cta-btn cta-soon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          App Store にて近日公開
+        </span>
+        <span class="cta-note">リリースまでもう少し待っててね</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- MILK STRIP -->
+<div class="milk-strip">
+  <div class="milk-item">
+    <img src="assets/milk_excited.png" alt="ミルク（うれしい）" style="--d:3.8s;--dl:0s">
+    <span class="serif">ナイス<br>ショット！</span>
+  </div>
+  <div class="milk-item">
+    <img src="assets/milk_wink.png" alt="ミルク（ウインク）" style="--d:4.2s;--dl:.6s">
+    <span class="serif">今日も<br>ラウンド♪</span>
+  </div>
+  <div class="milk-item">
+    <img src="assets/milk_smug.png" alt="ミルク（どや）" style="--d:4s;--dl:1.2s">
+    <span class="serif">ベスト<br>スコア更新</span>
+  </div>
+  <div class="milk-item">
+    <img src="assets/milk_normal.png" alt="ミルク（にっこり）" style="--d:3.6s;--dl:1.8s">
+    <span class="serif">一緒に<br>がんばろ！</span>
+  </div>
+  <div class="milk-item">
+    <img src="assets/milk_shy.png" alt="ミルク（てれ）" style="--d:4.4s;--dl:2.4s">
+    <span class="serif">パットは<br>修行中…</span>
+  </div>
+</div>
+
+<!-- SCREENSHOTS -->
+<section class="screenshots">
+  <h2 class="section-title">アプリ画面</h2>
+  <div class="shots-track">
+    <div class="shot"><img src="assets/store1.png" alt="ホーム画面" loading="lazy"></div>
+    <div class="shot"><img src="assets/store2.png" alt="成長きろく" loading="lazy"></div>
+    <div class="shot"><img src="assets/store3.png" alt="ラウンド完了" loading="lazy"></div>
+    <div class="shot"><img src="assets/store4.png" alt="スコアきろく" loading="lazy"></div>
+    <div class="shot"><img src="assets/store5.png" alt="シェアカード" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<div class="page">
+  <section class="features">
+    <h2 class="section-title">アプリの特徴</h2>
+    <div class="features-grid">
+      <div class="feat-card">
+        <img src="assets/milk_character.png" class="feat-milk" alt="ミルク" loading="lazy">
+        <h3>かんたんスコア記録</h3>
+        <p>ホールごとのスコアもパット数も、直感的にすばやく記録できます</p>
+      </div>
+      <div class="feat-card">
+        <img src="assets/milk_costume_gold.png" class="feat-milk" alt="ミルク（コスチューム）" loading="lazy">
+        <h3>相棒ミルクが育つ</h3>
+        <p>記録するほどミルクがレベルアップ。新しいコスチュームも解放されます</p>
+      </div>
+      <div class="feat-card">
+        <img src="assets/milk_wink.png" class="feat-milk" alt="ミルク" loading="lazy">
+        <h3>上達がひと目でわかる</h3>
+        <p>平均スコアやベストスコアをグラフで見える化。成長が実感できます</p>
+      </div>
+      <div class="feat-card">
+        <img src="assets/milk_smug.png" class="feat-milk" alt="ミルク" loading="lazy">
+        <h3>ラウンドをシェア</h3>
+        <p>おしゃれなスコアカードで、今日のゴルフをかわいくSNSにシェア</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <p>
+    <a href="privacy-policy.html">プライバシーポリシー</a>
+    &nbsp;·&nbsp;
+    <a href="terms.html">利用規約</a>
+    &nbsp;·&nbsp;
+    <a href="mailto:akiyu0901@gmail.com">お問い合わせ</a>
+    &nbsp;·&nbsp;
+    <a href="../">← すべてのアプリ</a>
+  </p>
+  <p>© 2026 Akiharu Hyuga</p>
+</footer>
+
+<script>
+  const sp = document.getElementById('sp');
+  const syms   = ['✦','✧','⋆','·','✿','♡'];
+  const colors = ['#f5c860','#f0a0b8','#aedd96','#d4c5f0'];
+  for (let i = 0; i < 28; i++) {
+    const el = document.createElement('div');
+    el.className = 'sp';
+    el.textContent = syms[Math.floor(Math.random()*syms.length)];
+    el.style.left = Math.random()*100+'%';
+    el.style.top  = (5+Math.random()*85)+'%';
+    el.style.setProperty('--sz',  (10+Math.random()*10)+'px');
+    el.style.setProperty('--dur', (5+Math.random()*7)+'s');
+    el.style.setProperty('--del', (Math.random()*9)+'s');
+    el.style.setProperty('--cl',  colors[Math.floor(Math.random()*colors.length)]);
+    sp.appendChild(el);
+  }
+</script>
+</body>
+</html>
